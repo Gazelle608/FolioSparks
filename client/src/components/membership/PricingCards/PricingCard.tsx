@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoadingSpinner } from '../../common/LoadingSpinner';
+import { LoadingSpinner } from '../../common/LoadingSpinner/LoadingSpinner';
 
 interface PricingCardProps {
   plan: {
@@ -39,7 +39,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({ plan, onSelect, isLoad
         </div>
 
         <ul className="space-y-2 mb-6">
-          {plan.features.map((feature, index) => (
+          {plan.features.map((feature: string, index: number) => (
             <li key={index} className="flex items-start gap-2 text-sm">
               <span className="text-primary-600 mt-1">✓</span>
               <span className="text-gray-700">{feature}</span>

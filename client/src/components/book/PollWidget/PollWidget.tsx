@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Poll } from '../../../types';
+import { Poll } from '../../../types/poll';
 
 interface PollWidgetProps {
   poll: Poll;
@@ -23,7 +23,7 @@ export const PollWidget: React.FC<PollWidgetProps> = ({ poll, onVote }) => {
       <p className="text-sm text-gray-500 mb-4">{poll.description}</p>
       
       <div className="space-y-2 mb-4">
-        {poll.options?.map((option: any) => (
+        {poll.options?.map((option: { id: string; text: string; votes: number }) => (
           <label
             key={option.id}
             className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
@@ -44,7 +44,7 @@ export const PollWidget: React.FC<PollWidgetProps> = ({ poll, onVote }) => {
             <span className="flex-1 text-gray-700">{option.text}</span>
             {hasVoted && option.votes && (
               <span className="text-sm text-gray-400">
-                {Math.round((option.votes / poll.total_votes) * 100)}%
+                {poll.total_votes > 0 ? Math.round((option.votes / poll.total_votes) * 100) : 0}%
               </span>
             )}
           </label>

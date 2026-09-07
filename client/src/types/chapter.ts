@@ -1,6 +1,5 @@
 import { Book } from './book';
-import { IconProps } from './icons';
- 
+
 export interface Chapter {
   id: string;
   book_id: string;

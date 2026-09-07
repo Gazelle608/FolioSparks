@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { IconSparks, IconHeart, IconClose } from '../../../types/icons';
+import { Card } from '../../common/Card';
+import { Button } from '../../common/Button';
+import { Input } from '../../common/Input';
 import { useAuth } from '../../../hooks/useAuth';
 
 interface SparksWidgetProps {
@@ -37,17 +41,26 @@ export const SparksWidget: React.FC<SparksWidgetProps> = ({
 
   if (!user) {
     return (
-      <div className="bg-gray-100 rounded-lg p-4 text-center">
-        <p className="text-gray-600">Sign in to send Sparks to authors ✨</p>
-      </div>
+      <Card className="text-center py-6">
+        <IconSparks size={32} color="#8EB69B" className="mx-auto mb-3" />
+        <p className="text-gray-600">Sign in to send Sparks to authors</p>
+        <Button variant="primary" size="sm" className="mt-3">
+          Sign In
+        </Button>
+      </Card>
     );
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <Card className="p-6">
       <div className="flex items-center justify-between mb-4">
-        <h4 className="font-serif text-primary-900">✨ Send Sparks</h4>
-        <span className="text-sm text-gray-500">Balance: {userBalance} Sparks</span>
+        <div className="flex items-center gap-2">
+          <IconSparks size={24} color="#F4A460" />
+          <h4 className="font-serif text-primary-900">Send Sparks</h4>
+        </div>
+        <span className="text-sm text-gray-500">
+          Balance: <span className="font-semibold text-spark-dark">{userBalance}</span>
+        </span>
       </div>
 
       <p className="text-sm text-gray-600 mb-4">
@@ -62,11 +75,13 @@ export const SparksWidget: React.FC<SparksWidgetProps> = ({
               setSelectedAmount(amount);
               setCustomAmount('');
             }}
-            className={`py-2 rounded-lg font-semibold transition-all duration-200 ${
-              selectedAmount === amount
-                ? 'bg-primary-600 text-white'
+            className={`
+              py-2 rounded-lg font-semibold transition-all duration-200
+              ${selectedAmount === amount
+                ? 'bg-primary-600 text-white shadow-md'
                 : 'bg-primary-50 text-primary-700 hover:bg-primary-100'
-            }`}
+              }
+            `}
           >
             {amount}
           </button>
@@ -74,7 +89,7 @@ export const SparksWidget: React.FC<SparksWidgetProps> = ({
       </div>
 
       <div className="mb-4">
-        <input
+        <Input
           type="number"
           placeholder="Custom amount"
           value={customAmount}
@@ -82,7 +97,6 @@ export const SparksWidget: React.FC<SparksWidgetProps> = ({
             setCustomAmount(e.target.value);
             setSelectedAmount(null);
           }}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-600 focus:border-primary-600"
           min="1"
         />
       </div>
@@ -90,28 +104,31 @@ export const SparksWidget: React.FC<SparksWidgetProps> = ({
       <div className="mb-4">
         <button
           onClick={() => setShowNote(!showNote)}
-          className="text-sm text-primary-600 hover:text-primary-700"
+          className="text-sm text-primary-600 hover:text-primary-700 flex items-center gap-1"
         >
           {showNote ? 'Hide note' : 'Add a note (optional)'}
+          <IconHeart size={14} color="#235347" />
         </button>
         {showNote && (
           <textarea
             placeholder="Leave a message for the author..."
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            className="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-primary-600 focus:border-primary-600"
+            className="w-full mt-2 px-4 py-2 border border-primary-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             rows={2}
           />
         )}
       </div>
 
-      <button
+      <Button
         onClick={handleSend}
         disabled={!selectedAmount && !customAmount}
-        className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 text-primary-900 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+        fullWidth
+        className="bg-spark-gradient text-primary-900 hover:shadow-lg"
       >
-        Send Sparks ✨
-      </button>
-    </div>
+        <IconSparks size={18} className="mr-2" />
+        Send Sparks
+      </Button>
+    </Card>
   );
 };

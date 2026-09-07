@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { IconPoll, IconCheck, IconVote } from '../../../types/icons';
+import { Card } from '../../common/Card';
+import { Button } from '../../common/Button';
 import { Poll } from '../../../types/poll';
+import { useAuth } from '../../../hooks/useAuth';
 
 interface PollWidgetProps {
   poll: Poll;
@@ -7,63 +11,97 @@ interface PollWidgetProps {
 }
 
 export const PollWidget: React.FC<PollWidgetProps> = ({ poll, onVote }) => {
+  const { user } = useAuth();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [hasVoted, setHasVoted] = useState(false);
+  const [voted, setVoted] = useState(false);
 
   const handleVote = () => {
-    if (selectedOption && !hasVoted) {
-      onVote(selectedOption);
-      setHasVoted(true);
-    }
+    if (!selectedOption) return;
+    onVote(selectedOption);
+    setVoted(true);
   };
 
+  const totalVotes = poll.options.reduce((sum, opt) => sum + opt.votes, 0);
+
   return (
-    <div className="bg-white rounded-xl shadow-md p-6">
-      <h4 className="font-serif text-primary-900 text-lg mb-2">{poll.question}</h4>
-      <p className="text-sm text-gray-500 mb-4">{poll.description}</p>
-      
-      <div className="space-y-2 mb-4">
-        {poll.options?.map((option: { id: string; text: string; votes: number }) => (
-          <label
-            key={option.id}
-            className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
-              selectedOption === option.id
-                ? 'border-primary-600 bg-primary-50'
-                : 'border-gray-200 hover:border-primary-300'
-            } ${hasVoted ? 'opacity-75 cursor-default' : ''}`}
-          >
-            <input
-              type="radio"
-              name={`poll-${poll.id}`}
-              value={option.id}
-              checked={selectedOption === option.id}
-              onChange={() => !hasVoted && setSelectedOption(option.id)}
-              disabled={hasVoted}
-              className="text-primary-600"
-            />
-            <span className="flex-1 text-gray-700">{option.text}</span>
-            {hasVoted && option.votes && (
-              <span className="text-sm text-gray-400">
-                {poll.total_votes > 0 ? Math.round((option.votes / poll.total_votes) * 100) : 0}%
-              </span>
-            )}
-          </label>
-        ))}
+    <Card className="p-6">
+      <div className="flex items-start gap-3 mb-4">
+        <IconPoll size={24} color="#235347" className="flex-shrink-0 mt-1" />
+        <div>
+          <h4 className="font-serif text-primary-900">{poll.title}</h4>
+          {poll.description && (
+            <p className="text-sm text-gray-600">{poll.description}</p>
+          )}
+        </div>
       </div>
 
-      {!hasVoted ? (
-        <button
-          onClick={handleVote}
-          disabled={!selectedOption}
-          className="w-full py-2 bg-primary-600 text-white rounded-lg font-semibold hover:bg-primary-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          Vote
-        </button>
-      ) : (
-        <div className="text-center text-sm text-gray-500">
-          ✅ Thanks for voting!
-        </div>
-      )}
-    </div>
+      <div className="space-y-3">
+        {poll.options.map((option) => {
+          const percentage = totalVotes > 0 ? (option.votes / totalVotes) * 100 : 0;
+          const isSelected = selectedOption === option.id;
+
+          return (
+            <button
+              key={option.id}
+              onClick={() => !voted && setSelectedOption(option.id)}
+              disabled={voted}
+              className={`
+                w-full text-left p-3 rounded-lg border-2 transition-all duration-200 relative
+                ${voted ? 'cursor-default' : 'cursor-pointer hover:bg-primary-50'}
+                ${isSelected ? 'border-primary-600 bg-primary-50' : 'border-primary-200'}
+                ${voted && option.id === poll.options.find(o => o.id === selectedOption)?.id ? 'border-primary-600' : ''}
+              `}
+            >
+              <div className="flex items-center justify-between relative z-10">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-medium text-primary-900">
+                    {option.text}
+                  </span>
+                  {voted && option.id === selectedOption && (
+                    <IconCheck size={16} color="#235347" />
+                  )}
+                </div>
+                {voted && (
+                  <span className="text-sm font-semibold text-primary-600">
+                    {percentage.toFixed(1)}%
+                  </span>
+                )}
+              </div>
+              {voted && (
+                <div
+                  className="absolute inset-0 bg-primary-100 rounded-lg opacity-30"
+                  style={{ width: `${percentage}%` }}
+                />
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      <div className="flex items-center justify-between mt-4 pt-3 border-t border-primary-100">
+        <span className="text-sm text-gray-500">
+          {totalVotes} {totalVotes === 1 ? 'vote' : 'votes'}
+        </span>
+        {!voted && user ? (
+          <Button
+            onClick={handleVote}
+            disabled={!selectedOption}
+            size="sm"
+            icon={IconVote}
+          >
+            Vote
+          </Button>
+        ) : !user ? (
+          <Button variant="secondary" size="sm">
+            Sign in to vote
+          </Button>
+        ) : (
+          <span className="text-sm text-primary-600 flex items-center gap-1">
+            <IconCheck size={16} color="#235347" />
+            Voted
+          </span>
+        )}
+      </div>
+    </Card>
   );
 };

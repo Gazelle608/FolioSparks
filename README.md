@@ -3,6 +3,7 @@
 Serialized fiction that pays its authors directly.
 
 ## Stack
+
 - **Frontend:** React + TypeScript + Vite + TailwindCSS
 - **Backend:** Node.js + Express + TypeScript
 - **Database + Auth + Storage:** Supabase (Postgres)

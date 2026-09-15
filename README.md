@@ -1,32 +1,31 @@
-# React + TypeScript + Vite
+# FolioSparks
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Serialized fiction that pays its authors directly.
 
-Currently, two official plugins are available:
+## Stack
+- **Frontend:** React + TypeScript + Vite + TailwindCSS
+- **Backend:** Node.js + Express + TypeScript
+- **Database + Auth + Storage:** Supabase (Postgres)
+- **Payments:** Stripe (subscriptions only — donations go direct to authors)
+- **TTS:** Google Cloud TTS (Spark Pro audio downloads)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Setup
 
-## React Compiler
+```bash
+# 1. Install
+npm install
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+# 2. Copy env
+cp .env.example .env
 
-## Expanding the Oxlint configuration
+# 3. Link Supabase
+supabase link --project-ref <your-ref>
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+# 4. Push migrations
+npm run db:push
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+# 5. Generate TS types
+npm run db:types
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+# 6. Run
+npm run dev

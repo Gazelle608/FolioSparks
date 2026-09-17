@@ -1,4 +1,4 @@
-import { forwardRef, useId, type SelectHTMLAttributes } from 'react';
+import { forwardRef, type SelectHTMLAttributes, useId } from "react";
 
 interface Option {
   value: string;
@@ -15,7 +15,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ label, hint, error, options, placeholder, className = '', id, ...props }, ref) => {
+  ({ label, hint, error, options, placeholder, className = "", id, ...props }, ref) => {
     const generatedId = useId();
     const inputId = id ?? generatedId;
 
@@ -36,14 +36,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             id={inputId}
             aria-invalid={!!error}
             className={[
-              'w-full h-10 px-3 pr-9 rounded-md border bg-white',
-              'text-sm text-primary-900 appearance-none cursor-pointer',
-              'transition-colors',
+              "w-full h-10 px-3 pr-9 rounded-md border bg-white",
+              "text-sm text-primary-900 appearance-none cursor-pointer",
+              "transition-colors",
               error
-                ? 'border-danger focus:ring-2 focus:ring-danger focus:outline-none'
-                : 'border-primary-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none',
+                ? "border-danger focus:ring-2 focus:ring-danger focus:outline-none"
+                : "border-primary-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 focus:outline-none",
               className,
-            ].join(' ')}
+            ].join(" ")}
             {...props}
           >
             {placeholder && (
@@ -51,7 +51,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 {placeholder}
               </option>
             )}
-            {options.map((opt) => (
+            {options.map(opt => (
               <option key={opt.value} value={opt.value} disabled={opt.disabled}>
                 {opt.label}
               </option>
@@ -72,14 +72,18 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </svg>
         </div>
 
-        {error ? (
-          <p className="mt-1 text-xs text-danger">{error}</p>
-        ) : hint ? (
-          <p className="mt-1 text-xs text-primary-400">{hint}</p>
-        ) : null}
+        {error
+          ? (
+              <p className="mt-1 text-xs text-danger">{error}</p>
+            )
+          : hint
+            ? (
+                <p className="mt-1 text-xs text-primary-400">{hint}</p>
+              )
+            : null}
       </div>
     );
-  }
+  },
 );
 
-Select.displayName = 'Select';
+Select.displayName = "Select";

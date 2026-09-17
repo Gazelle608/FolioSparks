@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <!-- Background book -->
+  <rect x="120" y="100" width="160" height="120" rx="8" fill="#DAF1DE" stroke="#8EB69B" stroke-width="2"/>
+  <line x1="200" y1="100" x2="200" y2="220" stroke="#8EB69B" stroke-width="2"/>
+  <line x1="140" y1="130" x2="185" y2="130" stroke="#8EB69B" stroke-width="2"/>
+  <line x1="140" y1="150" x2="185" y2="150" stroke="#8EB69B" stroke-width="2"/>
+  <line x1="140" y1="170" x2="175" y2="170" stroke="#8EB69B" stroke-width="2"/>
+  <line x1="215" y1="130" x2="260" y2="130" stroke="#8EB69B" stroke-width="2"/>
+  <line x1="215" y1="150" x2="260" y2="150" stroke="#8EB69B" stroke-width="2"/>
+
+  <!-- Floating spark -->
+  <path d="M200 40 L205 60 L225 65 L205 70 L200 90 L195 70 L175 65 L195 60 Z"
+        fill="#FFD966" stroke="#051F20" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

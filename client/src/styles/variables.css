@@ -1,0 +1,28 @@
+:root {
+  /* Core palette — mirrors tailwind.config but for raw CSS use */
+  --forest-950: #051F20;
+  --forest-900: #0B2B26;
+  --forest-800: #163832;
+  --forest-700: #235347;
+  --sage-400: #8EB69B;
+  --sage-100:#DAF1DE;
+  --spark:#FFD966;
+
+  /* Semantic */
+  --bg: var(--sage-100);
+  --bg-deep: var(--forest-950);
+  --ink: var(--forest-950);
+  --ink-soft: var(--forest-800);
+  --ink-muted: var(--sage-400);
+  --cta: var(--forest-700);
+  --cta-hover: var(--forest-800);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 220ms;
+}

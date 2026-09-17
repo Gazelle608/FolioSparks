@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 48" fill="none">
+  <!-- Spark mark -->
+  <g transform="translate(0, 4)">
+    <path d="M20 0 L24 16 L40 20 L24 24 L20 40 L16 24 L0 20 L16 16 Z"
+          fill="#FFD966" stroke="#051F20" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="52" y="33"
+        font-family="Merriweather, Georgia, serif"
+        font-size="26"
+        font-weight="700"
+        fill="#051F20"
+        letter-spacing="-0.5">
+    Folio<tspan fill="#235347">Sparks</tspan>
+  </text>
+</svg>

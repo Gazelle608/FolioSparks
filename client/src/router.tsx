@@ -6,7 +6,7 @@ import SignInPage from '@/pages/SignInPage';
 import SignUpPage from '@/pages/SignUpPage';
 import OnboardingPage from '@/pages/OnboardingPage';
 import StudioPage from '@/pages/StudioPage';
-import { ProtectedRoute } from '@/components/auth/ProtectedRoute';
+import { ProtectedRoute } from '@/components/auth/protectedroute';
 
 export const router = createBrowserRouter([
   { path: '/', element: <HomePage /> },

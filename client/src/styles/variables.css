@@ -1,28 +1,187 @@
+/* ============================================================
+   FolioSparks — Design Tokens
+   The single source of truth for colors, spacing, radii, fonts.
+   Tailwind mirrors these in tailwind.config.js so `bg-primary-500`
+   and `var(--color-primary-500)` stay in sync.
+   ============================================================ */
+
 :root {
-  /* Core palette — mirrors tailwind.config but for raw CSS use */
-  --forest-950: #051F20;
-  --forest-900: #0B2B26;
-  --forest-800: #163832;
-  --forest-700: #235347;
-  --sage-400: #8EB69B;
-  --sage-100:#DAF1DE;
-  --spark:#FFD966;
+  /* ------------------------------------------------------------
+     PRIMARY — Deep greens
+     The brand foundation. Used for text, headers, dark sections.
+     ------------------------------------------------------------ */
+  --color-primary-50:  #DAF1DE;
+  --color-primary-100: #C5E4CB;
+  --color-primary-200: #9CCDAA;
+  --color-primary-300: #8EB69B;
+  --color-primary-400: #6A9A7A;
+  --color-primary-500: #235347;
+  --color-primary-600: #1A4036;
+  --color-primary-700: #163832;
+  --color-primary-800: #0B2B26;
+  --color-primary-900: #051F20;
 
-  /* Semantic */
-  --bg: var(--sage-100);
-  --bg-deep: var(--forest-950);
-  --ink: var(--forest-950);
-  --ink-soft: var(--forest-800);
-  --ink-muted: var(--sage-400);
-  --cta: var(--forest-700);
-  --cta-hover: var(--forest-800);
+  /* ------------------------------------------------------------
+     ACCENT — Soft mint
+     Used for secondary UI, muted text, dividers.
+     ------------------------------------------------------------ */
+  --color-accent-light:   #DAF1DE;
+  --color-accent:         #8EB69B;
+  --color-accent-dark:    #235347;
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
+  /* ------------------------------------------------------------
+     SPARK — The one warm accent
+     Reserved for Sparks currency + upsell moments. Do not
+     reuse this for generic success/error states.
+     ------------------------------------------------------------ */
+  --color-spark:         #FFD966;
+  --color-spark-light:   #FFE9A8;
+  --color-spark-dark:    #E5B93F;
 
-  /* Motion */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur: 220ms;
+  /* ------------------------------------------------------------
+     SEMANTIC — System states
+     ------------------------------------------------------------ */
+  --color-danger:  #B91C1C;
+  --color-success: #235347;
+  --color-warning: #D97706;
+  --color-info:    #0369A1;
+
+  /* ------------------------------------------------------------
+     SURFACES
+     ------------------------------------------------------------ */
+  --color-background:      #DAF1DE; /* page bg */
+  --color-background-alt:  #FFFFFF; /* cards */
+  --color-background-muted:#F3F7F4; /* hover fills */
+  --color-border:          #C5E4CB;
+  --color-border-strong:   #8EB69B;
+
+  /* ------------------------------------------------------------
+     TEXT
+     ------------------------------------------------------------ */
+  --color-text-primary:    #051F20;
+  --color-text-secondary:  #163832;
+  --color-text-muted:      #6A9A7A;
+  --color-text-inverse:    #DAF1DE;
+
+  /* ------------------------------------------------------------
+     TYPOGRAPHY
+     ------------------------------------------------------------ */
+  --font-display: 'Merriweather', Georgia, 'Times New Roman', serif;
+  --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Monaco, monospace;
+
+  /* Type scale (rem-based) */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.5rem;    /* 24px */
+  --text-3xl:  1.875rem;  /* 30px */
+  --text-4xl:  2.25rem;   /* 36px */
+  --text-5xl:  3rem;      /* 48px */
+  --text-6xl:  3.75rem;   /* 60px */
+
+  /* ------------------------------------------------------------
+     SPACING
+     Tailwind already provides these; listed for JS access.
+     ------------------------------------------------------------ */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+
+  /* ------------------------------------------------------------
+     RADII
+     ------------------------------------------------------------ */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* ------------------------------------------------------------
+     SHADOWS
+     ------------------------------------------------------------ */
+  --shadow-sm:   0 1px 2px rgba(5, 31, 32, 0.05);
+  --shadow-md:   0 4px 12px rgba(5, 31, 32, 0.08);
+  --shadow-lg:   0 12px 32px rgba(5, 31, 32, 0.12);
+  --shadow-xl:   0 24px 48px rgba(5, 31, 32, 0.16);
+  --shadow-spark:0 4px 16px rgba(255, 217, 102, 0.4);
+
+  /* ------------------------------------------------------------
+     ANIMATION
+     ------------------------------------------------------------ */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-normal: 250ms;
+  --duration-slow:   400ms;
+
+  /* ------------------------------------------------------------
+     LAYOUT
+     ------------------------------------------------------------ */
+  --navbar-height: 4rem; /* 64px — matches h-16 in Navbar */
+  --reader-max-width: 42rem; /* 672px — reading column */
+
+  /* ------------------------------------------------------------
+     Z-INDEX LADDER
+     ------------------------------------------------------------ */
+  --z-base:     0;
+  --z-dropdown: 20;
+  --z-sticky:   30;
+  --z-navbar:   40;
+  --z-modal:    50;
+  --z-toast:    100;
+}
+
+/* ============================================================
+   DARK MODE
+   Applied when ThemeContext sets <html data-theme="dark">.
+   Palette inverts: deep green becomes background, mint becomes text.
+   ============================================================ */
+[data-theme='dark'] {
+  /* Surfaces swap */
+  --color-background:       #051F20;
+  --color-background-alt:   #0B2B26;
+  --color-background-muted: #163832;
+  --color-border:           #1A4036;
+  --color-border-strong:    #235347;
+
+  /* Text swaps */
+  --color-text-primary:   #DAF1DE;
+  --color-text-secondary: #C5E4CB;
+  --color-text-muted:     #8EB69B;
+  --color-text-inverse:   #051F20;
+
+  /* Shadows get softer in dark */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================================
+   SYSTEM PREFERENCE
+   When ThemeContext uses 'system', it resolves to the OS preference
+   and sets data-theme accordingly. These rules handle the transition.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  [data-theme='system'] {
+    --color-background:       #051F20;
+    --color-background-alt:   #0B2B26;
+    --color-background-muted: #163832;
+    --color-border:           #1A4036;
+    --color-border-strong:    #235347;
+    --color-text-primary:     #DAF1DE;
+    --color-text-secondary:   #C5E4CB;
+    --color-text-muted:       #8EB69B;
+    --color-text-inverse:     #051F20;
+  }
 }

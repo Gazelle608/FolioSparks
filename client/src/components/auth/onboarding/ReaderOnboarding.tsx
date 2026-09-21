@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { completeOnboarding } from "../../../api/auth";
 import { SparkFilledIcon } from "../../../assets/icons";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useauth";
 import { Button, Card } from "../../ui";
 
 export function ReaderOnboarding() {

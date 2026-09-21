@@ -5,7 +5,7 @@ import type { Poll, PollOption } from "../../types/poll";
 
 import { vote as castVote, getPollOptions, getUserVote } from "../../api/polls";
 import { PollIcon } from "../../assets/icons";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useauth";
 import { PollResults } from "./PollResults";
 import { PollVoteForm } from "./PollVoteForm";
 

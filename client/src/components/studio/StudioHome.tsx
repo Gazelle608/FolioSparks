@@ -11,7 +11,7 @@ import {
   getStoryById,
 } from "../../api/stories";
 import { PollIcon, SparkOutlineIcon } from "../../assets/icons";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useauth";
 import { Button, Card, Spinner, TabPanel, Tabs, useToast } from "../ui";
 import { ChapterByChapterUpload } from "./ChapterByChapterUpload";
 import { FullManuscriptUpload } from "./FullManuscriptUpload";

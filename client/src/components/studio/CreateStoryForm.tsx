@@ -2,7 +2,7 @@ import { type FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { createStory, uploadCover } from "../../api/stories";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useauth";
 import { Button, Input, Select, Textarea, useToast } from "../ui";
 
 interface CreateStoryFormProps {

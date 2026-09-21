@@ -5,7 +5,7 @@ import { completeOnboarding, updateProfile } from "../../../api/auth";
 import { createAuthor } from "../../../api/authors";
 import { createDonationLink } from "../../../api/donations";
 import { SparkOutlineIcon } from "../../../assets/icons";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useauth";
 import { Button, Card, Input } from "../../ui";
 import {
   type DonationLinkDraft,

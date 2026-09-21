@@ -5,7 +5,7 @@ import {
   deleteDonationLink,
   listDonationLinks,
 } from "../../api/donations";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useauth";
 import {
   type DonationLinkDraft,
   type DonationPlatform,

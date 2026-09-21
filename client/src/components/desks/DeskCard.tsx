@@ -10,7 +10,7 @@ import {
   getPendingInvites,
 } from "../../api/desks";
 import { DeskIcon } from "../../assets/icons";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../hooks/useauth";
 import { Card, useToast } from "../ui";
 import { CoWriterList } from "./CoWriterList";
 import { DeskInvite } from "./DeskInvite";

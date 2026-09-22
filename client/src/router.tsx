@@ -1,47 +1,71 @@
-import { createBrowserRouter } from 'react-router-dom';
-import App from './App';
-import { HomePage } from './pages/HomePage';
-import { LibraryPage } from './pages/LibraryPage';
-import { StoryPage } from './pages/StoryPage';
-import { ReaderPage } from './pages/ReaderPage';
-import { StudioPage } from './pages/StudioPage';
-import { NewStoryPage } from './pages/NewStoryPage';
-import { EditStoryPage } from './pages/EditStoryPage';
-import { ChapterEditorPage } from './pages/ChapterEditorPage';
-import { PublishFlowPage } from './pages/PublishFlowPage';
-import { AnalyticsPage } from './pages/AnalyticsPage';
-import { DonationSettingsPage } from './pages/DonationSettingsPage';
-import { MembershipPage } from './pages/MembershipPage';
-import { CheckoutSuccessPage } from './pages/CheckoutSuccessPage';
-import { AuthorProfilePage } from './pages/AuthorProfilePage';
-import { ReaderProfilePage } from './pages/ReaderProfilePage';
-import { SignInPage } from './pages/SignInPage';
-import { SignUpPage } from './pages/SignUpPage';
-import { OnboardingPage } from './pages/OnboardingPage';
-import { NotFoundPage } from './pages/NotFoundPage';
-import { ProtectedRoute } from './components/auth/protectedroute';
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
+import App from "./App";
+// Route guards
+import { ProtectedRoute } from "./components/auth/protectedroute";
+import { AnalyticsPage } from "./pages/analyticspage";
+import { AuthorProfilePage } from "./pages/authorprofilepage";
+import { ChapterEditorPage } from "./pages/chaptereditorpage";
+import { CheckoutSuccessPage } from "./pages/checkoutsuccesspage";
+import { DonationSettingsPage } from "./pages/donationsettingspage";
+import { EditStoryPage } from "./pages/editstorypage";
+// Shell pages
+import { HomePage } from "./pages/homepage";
+import { LibraryPage } from "./pages/librarypage";
+import { MembershipPage } from "./pages/membershippage";
+import { NewStoryPage } from "./pages/newstorypage";
+import { NotFoundPage } from "./pages/notfoundpage";
+import { OnboardingPage } from "./pages/onboardingpage";
+import { PublishFlowPage } from "./pages/publishflowpage";
+import { ReaderPage } from "./pages/readerpage";
+import { ReaderProfilePage } from "./pages/readerprofilepage";
+// Full-screen pages (no navbar/footer)
+import { SignInPage } from "./pages/signinpage";
+import { SignUpPage } from "./pages/signuppage";
+import { StoryPage } from "./pages/storypage";
+import { StudioPage } from "./pages/studiopage";
+
+// ---------------------------------------------------------------------------
+// Router
+// Two top-level trees:
+//   1. Shell routes — inside <App /> (navbar + footer)
+//   2. Full-screen routes — no chrome (auth, onboarding, reader)
+// ---------------------------------------------------------------------------
 export const router = createBrowserRouter([
-  // ----------------------------------------------------------
-  // SHELL ROUTES — navbar + footer
-  // ----------------------------------------------------------
+  // ============================================================
+  // SHELL
+  // ============================================================
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
+      // Public
       { index: true, element: <HomePage /> },
-      { path: 'library', element: <LibraryPage /> },
-      { path: 'story/:slug', element: <StoryPage /> },
-      { path: 'membership', element: <MembershipPage /> },
-      { path: 'checkout/success', element: <CheckoutSuccessPage /> },
+      { path: "library", element: <LibraryPage /> },
+      { path: "story/:slug", element: <StoryPage /> },
+      { path: "membership", element: <MembershipPage /> },
 
-      // Author profiles & reader profiles
-      { path: ':username', element: <AuthorProfilePage /> },
-      { path: 'me/library', element: <ReaderProfilePage /> },
-
-      // Studio (protected)
+      // Authenticated
       {
-        path: 'studio',
+        path: "checkout/success",
+        element: (
+          <ProtectedRoute>
+            <CheckoutSuccessPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "me/library",
+        element: (
+          <ProtectedRoute>
+            <ReaderProfilePage />
+          </ProtectedRoute>
+        ),
+      },
+
+      // Studio (author only, onboarding complete)
+      {
+        path: "studio",
         element: (
           <ProtectedRoute requireOnboarded>
             <StudioPage />
@@ -49,7 +73,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'studio/new',
+        path: "studio/new",
         element: (
           <ProtectedRoute requireOnboarded requireAuthor>
             <NewStoryPage />
@@ -57,7 +81,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'studio/story/:storyId',
+        path: "studio/story/:storyId",
         element: (
           <ProtectedRoute requireOnboarded requireAuthor>
             <EditStoryPage />
@@ -65,7 +89,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'studio/story/:storyId/publish',
+        path: "studio/story/:storyId/publish",
         element: (
           <ProtectedRoute requireOnboarded requireAuthor>
             <PublishFlowPage />
@@ -73,7 +97,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'studio/story/:storyId/chapter/:chapterNumber',
+        path: "studio/story/:storyId/chapter/:chapterNumber",
         element: (
           <ProtectedRoute requireOnboarded requireAuthor>
             <ChapterEditorPage />
@@ -81,7 +105,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'studio/story/:storyId/analytics',
+        path: "studio/story/:storyId/analytics",
         element: (
           <ProtectedRoute requireOnboarded requireAuthor>
             <AnalyticsPage />
@@ -89,7 +113,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'studio/settings/donations',
+        path: "studio/settings/donations",
         element: (
           <ProtectedRoute requireOnboarded requireAuthor>
             <DonationSettingsPage />
@@ -97,16 +121,23 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Fallback
-      { path: '*', element: <NotFoundPage /> },
+      // Author profile — must come AFTER known paths so it doesn"t shadow them
+      { path: "@:username", element: <AuthorProfilePage /> },
+      { path: ":username", element: <AuthorProfilePage /> },
+
+      // Redirects for common typos
+      { path: "signin", element: <Navigate to="/signin" replace /> },
+
+      // 404 — must be last inside the shell
+      { path: "*", element: <NotFoundPage /> },
     ],
   },
 
-  // ----------------------------------------------------------
-  // FULL-SCREEN ROUTES — no navbar/footer
-  // ----------------------------------------------------------
-  { path: '/signin', element: <SignInPage /> },
-  { path: '/signup', element: <SignUpPage /> },
-  { path: '/onboarding', element: <OnboardingPage /> },
-  { path: '/read/:slug/:chapterNumber', element: <ReaderPage /> },
+  // ============================================================
+  // FULL-SCREEN — no navbar/footer
+  // ============================================================
+  { path: "/signin", element: <SignInPage /> },
+  { path: "/signup", element: <SignUpPage /> },
+  { path: "/onboarding", element: <OnboardingPage /> },
+  { path: "/read/:slug/:chapterNumber", element: <ReaderPage /> },
 ]);

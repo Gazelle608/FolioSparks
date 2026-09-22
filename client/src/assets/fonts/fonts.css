@@ -1,9 +1,12 @@
 /* ============================================================
    FolioSparks — Self-hosted fonts
-   Only needed if you downloaded .woff2 files manually.
-   If using @fontsource, skip this file entirely.
+   Loaded via @font-face. Referenced from styles/globals.css.
    ============================================================ */
 
+/* ------------------------------------------------------------
+   Merriweather — display serif
+   Used for: headings, story titles, reader body text
+   ------------------------------------------------------------ */
 @font-face {
   font-family: "Merriweather";
   src: url("./Merriweather-Regular.woff2") format("woff2");
@@ -20,6 +23,11 @@
   font-display: swap;
 }
 
+/* ------------------------------------------------------------
+   Inter — UI sans (variable)
+   Used for: body text, buttons, forms, everything UI
+   Variable axis: 100–900 weight
+   ------------------------------------------------------------ */
 @font-face {
   font-family: "Inter";
   src: url("./Inter-Variable.woff2") format("woff2-variations");

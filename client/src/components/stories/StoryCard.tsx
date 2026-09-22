@@ -4,16 +4,15 @@ import type { StoryCardData } from "../../types/story";
 
 import { getCoverUrl } from "../../api/supabase";
 import {
-  AudioAvailableBadge,
   CoWrittenBadge,
   DeskIcon,
   PollIcon,
   SparkFilledIcon,
 } from "../../assets/icons";
-import { AudioAvailableBadge } from "../../assets/icons/AudioAvailableBadge";
+import { AudioAvailableBadge } from "../../assets/icons/audioavailablebadge";
 import { GenrePill } from "./GenrePill";
-import { StoryStats } from "./StoryStats";
-import { StoryTags } from "./StoryTags";
+import { StoryStats } from "./storystats";
+import { StoryTags } from "./storytags";
 
 interface StoryCardProps {
   story: StoryCardData;
@@ -34,7 +33,8 @@ const STATUS_LABELS: Record<string, { label: string; className: string }> = {
 };
 
 export function StoryCard({ story, variant = "grid", badge }: StoryCardProps) {
-  if (variant === "list") return <StoryCardList story={story} badge={badge} />;
+  if (variant === "list")
+    return <StoryCardList story={story} badge={badge} />;
   return <StoryCardGrid story={story} badge={badge} />;
 }
 

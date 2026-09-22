@@ -1,22 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import './styles/globals.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 
-// Fonts — choose ONE of these approaches
-// Option A (recommended):
-import '@fontsource/merriweather/400.css';
-import '@fontsource/merriweather/700.css';
-import '@fontsource-variable/inter';
+import { router } from "./router";
+// Global styles — this imports fonts.css, tailwind.css,
+// variables.css, and typography.css internally
+// CSS is handled by the bundler; TypeScript has no module declaration for it.
+// @ts-expect-error -- side-effect CSS import
+import "./styles/globals.css";
 
-// Option B (self-hosted):
-// import './assets/fonts/fonts.css';
+const rootElement = document.getElementById("root");
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+if (!rootElement) {
+  throw new Error("Root element #root not found in index.html");
+}
+
+ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>,
 );

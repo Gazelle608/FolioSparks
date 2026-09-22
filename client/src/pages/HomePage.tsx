@@ -29,34 +29,39 @@ export function HomePage() {
   );
 }
 
-// ---------------------------------------------------------------------------
-// HERO
-// ---------------------------------------------------------------------------
 function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary-900 via-primary-800 to-primary-700">
-      {/* Decorative sparks */}
+    <section className="relative overflow-hidden celestial-bg">
+      {/* Decorative celestial sparks */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <SparkFilledIcon
-          size={240}
-          className="absolute -top-12 -right-12 text-spark opacity-[0.06]"
+          size={280}
+          className="absolute -top-16 -right-16 text-spark opacity-[0.08]"
         />
         <SparkFilledIcon
-          size={120}
-          className="absolute bottom-10 left-10 text-spark opacity-[0.08]"
+          size={140}
+          className="absolute bottom-12 left-10 text-spark opacity-[0.10] "
+        />
+        <SparkFilledIcon
+          size={70}
+          className="absolute top-1/3 left-1/4 text-primary-300 opacity-20"
+        />
+        <SparkFilledIcon
+          size={50}
+          className="absolute bottom-1/3 right-1/4 text-primary-200 opacity-15"
         />
       </div>
 
       <Container size="xl" className="relative py-20 lg:py-28">
         <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur mb-6 border border-white/10">
             <SparkFilledIcon size={12} className="text-spark" />
-            <span className="text-xs font-semibold text-primary-50 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-primary-100 uppercase tracking-wider">
               Serialized fiction that pays its authors directly
             </span>
           </div>
 
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-primary-50">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-primary-100">
             Stories worth staying up for.
             <span className="block text-spark mt-2">
               Authors who actually get paid.
@@ -65,7 +70,7 @@ function Hero() {
 
           <p className="mt-6 text-lg text-primary-200 leading-relaxed max-w-xl">
             Readers spend Sparks on the chapters that hit hardest, vote on what
-            happens next, and donate straight to the author"s own Ko-fi or
+            happens next, and donate straight to the author's own Ko-fi or
             Patreon.
           </p>
 
@@ -79,7 +84,7 @@ function Hero() {
               <Button
                 variant="secondary"
                 size="lg"
-                className="bg-white/10 border-white/30 text-primary-50 hover:bg-white/20"
+                className="bg-white/10 border-white/30 text-primary-100 hover:bg-white/20"
               >
                 Start writing
               </Button>

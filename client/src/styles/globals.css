@@ -1,19 +1,14 @@
 /* ============================================================
    FolioSparks — Global Styles
-   Imports the three style layers, then applies base rules.
-   Order matters: tailwind first (so utilities can be overridden),
-   then variables, then typography.
    ============================================================ */
 
-@import './tailwind.css';
-@import './variables.css';
-@import './typography.css';
+@import "./tailwind.css";
+@import "./variables.css";
+@import "./typography.css";
 
 /* ============================================================
    RESET
-   Minimal. Tailwind handles the rest via preflight.
    ============================================================ */
-
 *,
 *::before,
 *::after {
@@ -26,12 +21,10 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-
   *,
   *::before,
   *::after {
@@ -49,78 +42,66 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-base);
   line-height: 1.55;
-  transition:
-    background-color var(--duration-normal) var(--ease-out),
-    color var(--duration-normal) var(--ease-out);
 }
 
-/* Prevent iOS zoom on input focus by keeping min 16px */
-input, textarea, select, button {
+input,
+textarea,
+select,
+button {
   font-family: inherit;
   font-size: inherit;
 }
-
-input, textarea {
+input,
+textarea {
   font-size: max(16px, 1em);
 }
 
-/* Images never overflow */
-img, video, svg {
+img,
+video,
+svg {
   display: block;
   max-width: 100%;
 }
 
-/* Buttons use pointer cursor (Tailwind reset removes this) */
 button:not(:disabled),
-[role='button']:not([aria-disabled='true']) {
+[role="button"]:not([aria-disabled="true"]) {
   cursor: pointer;
 }
 
-/* ============================================================
-   FOCUS RING
-   Applied globally, overridden per-component via focus-visible
-   ============================================================ */
 :focus-visible {
-  outline: 2px solid var(--color-primary-500);
+  outline: 2px solid var(--color-primary-700);
   outline-offset: 2px;
 }
-
 button:focus:not(:focus-visible),
 a:focus:not(:focus-visible) {
   outline: none;
 }
 
 /* ============================================================
-   SCROLLBAR — global styles, override per-element with
-   the .scrollbar-thin utility
+   SCROLLBAR
    ============================================================ */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--color-background);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary-300);
+  background: var(--color-primary-400);
   border-radius: var(--radius-full);
   border: 2px solid var(--color-background);
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-500);
+  background: var(--color-primary-700);
 }
-
-/* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary-300) var(--color-background);
+  scrollbar-color: var(--color-primary-400) var(--color-background);
 }
 
 /* ============================================================
-   SELECTION — brand-consistent text highlight
+   SELECTION
    ============================================================ */
 ::selection {
   background: var(--color-spark);
@@ -129,18 +110,15 @@ a:focus:not(:focus-visible) {
 
 /* ============================================================
    ANIMATIONS
-   Every keyframe used across the app. Add new ones here so
-   they're centralized.
    ============================================================ */
-
-/* ------------------------------------------------------------
-   MODAL + TOAST ENTRANCES
-   ------------------------------------------------------------ */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -151,7 +129,6 @@ a:focus:not(:focus-visible) {
     transform: translateY(0) scale(1);
   }
 }
-
 @keyframes slideDown {
   from {
     opacity: 0;
@@ -162,7 +139,6 @@ a:focus:not(:focus-visible) {
     transform: translateY(0);
   }
 }
-
 @keyframes slideInRight {
   from {
     opacity: 0;
@@ -174,14 +150,19 @@ a:focus:not(:focus-visible) {
   }
 }
 
-.animate-fadeIn      { animation: fadeIn var(--duration-fast) var(--ease-out); }
-.animate-slideUp     { animation: slideUp var(--duration-normal) var(--ease-out); }
-.animate-slideDown   { animation: slideDown var(--duration-normal) var(--ease-out); }
-.animate-slideInRight{ animation: slideInRight var(--duration-normal) var(--ease-out); }
+.animate-fadeIn {
+  animation: fadeIn var(--duration-fast) var(--ease-out);
+}
+.animate-slideUp {
+  animation: slideUp var(--duration-normal) var(--ease-out);
+}
+.animate-slideDown {
+  animation: slideDown var(--duration-normal) var(--ease-out);
+}
+.animate-slideInRight {
+  animation: slideInRight var(--duration-normal) var(--ease-out);
+}
 
-/* ------------------------------------------------------------
-   SPARK BURST — micro-interaction when a spark is sent
-   ------------------------------------------------------------ */
 @keyframes sparkBurst {
   0% {
     transform: scale(1);
@@ -196,35 +177,31 @@ a:focus:not(:focus-visible) {
     opacity: 0;
   }
 }
-
 @keyframes sparkPulse {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(255, 217, 102, 0.5);
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 199, 122, 0.55);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(255, 217, 102, 0);
+    box-shadow: 0 0 0 12px rgba(244, 199, 122, 0);
   }
 }
-
 .animate-spark-burst {
   animation: sparkBurst 0.6s var(--ease-out) forwards;
 }
-
 .animate-spark-pulse {
   animation: sparkPulse 2s var(--ease-in-out) infinite;
 }
 
-/* ------------------------------------------------------------
-   SKELETON SHIMMER
-   ------------------------------------------------------------ */
 @keyframes skeleton-shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
-/* ------------------------------------------------------------
-   COUNT-UP — subtle attention on numbers
-   ------------------------------------------------------------ */
 @keyframes countUp {
   from {
     opacity: 0;
@@ -235,47 +212,63 @@ a:focus:not(:focus-visible) {
     transform: translateY(0);
   }
 }
-
 .animate-count-up {
   animation: countUp var(--duration-normal) var(--ease-out);
 }
 
-/* ------------------------------------------------------------
-   HEARTBEAT — used on the "Burning right now" indicator
-   ------------------------------------------------------------ */
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  10%, 30% { transform: scale(1.1); }
-  20%      { transform: scale(0.95); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  10%,
+  30% {
+    transform: scale(1.1);
+  }
+  20% {
+    transform: scale(0.95);
+  }
 }
-
 .animate-heartbeat {
   animation: heartbeat 1.6s var(--ease-in-out) infinite;
 }
 
+/* Celestial twinkle — soft glow pulse for sparkly elements */
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+.animate-twinkle {
+  animation: twinkle 3s var(--ease-in-out) infinite;
+}
+
 /* ============================================================
    READER THEMES
-   Applied by ReaderControls — sets the reading panel colors.
    ============================================================ */
-[data-reader-theme='light'] {
-  --reader-bg:     #FFFFFF;
-  --reader-text:   #051F20;
-  --reader-muted:  #6A9A7A;
-  --reader-border: #DAF1DE;
+[data-reader-theme="light"] {
+  --reader-bg: var(--reader-theme-light-bg);
+  --reader-text: var(--reader-theme-light-text);
+  --reader-muted: var(--reader-theme-light-muted);
+  --reader-border: var(--reader-theme-light-border);
 }
-
-[data-reader-theme='sepia'] {
-  --reader-bg:     #F4ECD8;
-  --reader-text:   #3E2F1C;
-  --reader-muted:  #8A7654;
-  --reader-border: #D8C9A8;
+[data-reader-theme="sepia"] {
+  --reader-bg: var(--reader-theme-sepia-bg);
+  --reader-text: var(--reader-theme-sepia-text);
+  --reader-muted: var(--reader-theme-sepia-muted);
+  --reader-border: var(--reader-theme-sepia-border);
 }
-
-[data-reader-theme='dark'] {
-  --reader-bg:     #051F20;
-  --reader-text:   #DAF1DE;
-  --reader-muted:  #8EB69B;
-  --reader-border: #163832;
+[data-reader-theme="dark"] {
+  --reader-bg: var(--reader-theme-dark-bg);
+  --reader-text: var(--reader-theme-dark-text);
+  --reader-muted: var(--reader-theme-dark-muted);
+  --reader-border: var(--reader-theme-dark-border);
 }
 
 .reader-surface {
@@ -285,42 +278,54 @@ a:focus:not(:focus-visible) {
     background-color var(--duration-normal) var(--ease-out),
     color var(--duration-normal) var(--ease-out);
 }
-
 .reader-muted {
   color: var(--reader-muted);
 }
-
 .reader-border {
   border-color: var(--reader-border);
 }
 
 /* ============================================================
+   CELESTIAL DECORATIONS
+   ============================================================ */
+.celestial-glow {
+  box-shadow:
+    0 0 20px rgba(244, 199, 122, 0.3),
+    0 0 40px rgba(139, 123, 165, 0.2);
+}
+
+.celestial-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--color-background-alt), var(--color-background-alt)) padding-box,
+    linear-gradient(135deg, var(--color-spark) 0%, var(--color-primary-400) 100%) border-box;
+}
+
+/* ============================================================
    PRINT
-   Chapters should print cleanly — no chrome, real book layout.
    ============================================================ */
 @media print {
-  nav, footer, aside, .no-print {
+  nav,
+  footer,
+  aside,
+  .no-print {
     display: none !important;
   }
-
   body {
     background: white;
     color: black;
     font-size: 12pt;
     line-height: 1.5;
   }
-
   .reading-text {
     font-family: Georgia, serif;
     font-size: 12pt;
     color: black;
   }
-
   a {
     color: black;
     text-decoration: underline;
   }
-
   @page {
     margin: 2cm;
   }

@@ -3,16 +3,13 @@
    Merriweather for display (literary), Inter for UI (crisp).
    ============================================================ */
 
-/* ------------------------------------------------------------
-   BASE
-   ------------------------------------------------------------ */
 html {
   font-family: var(--font-body);
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-feature-settings: 'cv11', 'ss01'; /* Inter niceties */
+  font-feature-settings: "cv11", "ss01";
 }
 
 body {
@@ -22,29 +19,39 @@ body {
   line-height: 1.55;
 }
 
-/* ------------------------------------------------------------
-   HEADINGS
-   All headings use the display serif. Weight 700 for authority.
-   ------------------------------------------------------------ */
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .font-display {
   font-family: var(--font-display);
   font-weight: 700;
   letter-spacing: -0.01em;
   line-height: 1.2;
-  color: inherit;
+  /* No `color: inherit` — let Tailwind text-* classes win */
 }
 
-h1 { font-size: var(--text-4xl); }
-h2 { font-size: var(--text-3xl); }
-h3 { font-size: var(--text-2xl); }
-h4 { font-size: var(--text-xl); }
-h5 { font-size: var(--text-lg); }
-h6 { font-size: var(--text-base); }
+h1 {
+  font-size: var(--text-4xl);
+}
+h2 {
+  font-size: var(--text-3xl);
+}
+h3 {
+  font-size: var(--text-2xl);
+}
+h4 {
+  font-size: var(--text-xl);
+}
+h5 {
+  font-size: var(--text-lg);
+}
+h6 {
+  font-size: var(--text-base);
+}
 
-/* ------------------------------------------------------------
-   PARAGRAPHS & PROSE
-   ------------------------------------------------------------ */
 p {
   line-height: 1.65;
 }
@@ -56,20 +63,18 @@ a {
 }
 
 a:hover {
-  color: var(--color-primary-600);
+  color: var(--color-primary-700);
 }
 
-/* Focus ring on all interactive elements */
 :focus-visible {
-  outline: 2px solid var(--color-primary-500);
+  outline: 2px solid var(--color-primary-700);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
 }
 
-/* ------------------------------------------------------------
-   CODE
-   ------------------------------------------------------------ */
-code, pre, .font-mono {
+code,
+pre,
+.font-mono {
   font-family: var(--font-mono);
   font-size: 0.9em;
 }
@@ -95,17 +100,13 @@ pre code {
 
 /* ============================================================
    READING TEXT
-   Used by the reader and preview components. Book-like,
-   indented paragraphs, generous line-height.
    ============================================================ */
-
 .reading-text {
   font-family: var(--font-display);
   font-size: var(--text-lg);
   line-height: 1.75;
   color: var(--color-text-primary);
   letter-spacing: 0.005em;
-  /* Fallback font size — inline style from ReaderPrefs overrides */
 }
 
 .reading-text p {
@@ -113,7 +114,6 @@ pre code {
 }
 
 .reading-text p:first-of-type::first-letter {
-  /* Optional drop cap on the first paragraph */
   font-size: 1.1em;
   font-weight: 700;
 }
@@ -121,7 +121,7 @@ pre code {
 .reading-text blockquote {
   margin: 1.5em 0;
   padding-left: 1.25em;
-  border-left: 3px solid var(--color-primary-300);
+  border-left: 3px solid var(--color-primary-400);
   font-style: italic;
   color: var(--color-text-secondary);
 }
@@ -134,18 +134,21 @@ pre code {
   background: var(--color-primary-200);
 }
 
-.reading-text strong { font-weight: 700; }
-.reading-text em { font-style: italic; }
+.reading-text strong {
+  font-weight: 700;
+}
+.reading-text em {
+  font-style: italic;
+}
 
-/* Sizes mirror the theme tokens */
-.reading-text-sm { font-size: var(--text-base); }
-.reading-text-lg { font-size: var(--text-xl); }
+.reading-text-sm {
+  font-size: var(--text-base);
+}
+.reading-text-lg {
+  font-size: var(--text-xl);
+}
 
-/* ============================================================
-   TRUNCATION UTILITIES
-   (Tailwind provides .line-clamp-* — these are for cases
-   Tailwind isn't available, e.g. inside a raw HTML email.)
-   ============================================================ */
+/* Truncation */
 .truncate-1 {
   display: -webkit-box;
   -webkit-line-clamp: 1;
@@ -153,7 +156,6 @@ pre code {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
 .truncate-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -161,7 +163,6 @@ pre code {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
 .truncate-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;

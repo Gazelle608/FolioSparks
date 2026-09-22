@@ -1,114 +1,87 @@
 /* ============================================================
    FolioSparks — Tailwind Entry
-   The three directives + custom utilities layered on top.
    ============================================================ */
 
-/* Tailwind directives are processed by PostCSS. */
-/* stylelint-disable at-rule-no-unknown */
+/* stylelint-disable at-rule-no-unknown -- Tailwind CSS directives */
+/* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind base;
+/* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind components;
+/* stylelint-disable-next-line at-rule-no-unknown */
 @tailwind utilities;
 /* stylelint-enable at-rule-no-unknown */
 
-/* ============================================================
-   CUSTOM UTILITIES
-   Only add rules here if they're used in 3+ places.
-   Otherwise use Tailwind's `[]` arbitrary value syntax inline.
-   ============================================================ */
 @layer utilities {
-  /* ------------------------------------------------------------
-     SCROLLBAR — subtle, on-brand
-     ------------------------------------------------------------ */
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: var(--color-primary-300) transparent;
+    scrollbar-color: var(--color-primary-400) transparent;
   }
-
   .scrollbar-thin::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-
   .scrollbar-thin::-webkit-scrollbar-track {
     background: transparent;
   }
-
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: var(--color-primary-300);
+    background: var(--color-primary-400);
     border-radius: 3px;
   }
-
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: var(--color-primary-500);
+    background: var(--color-primary-700);
   }
 
-  /* ------------------------------------------------------------
-     TEXT BALANCE — for headings
-     ------------------------------------------------------------ */
   .text-balance {
     text-wrap: balance;
   }
-
   .text-pretty {
     text-wrap: pretty;
   }
 
-  /* ------------------------------------------------------------
-     SAFE AREA — for mobile notch/home-bar
-     ------------------------------------------------------------ */
   .pt-safe {
     padding-top: env(safe-area-inset-top);
   }
-
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* ------------------------------------------------------------
-     TAP HIGHLIGHT — no blue flash on mobile
-     ------------------------------------------------------------ */
   .no-tap-highlight {
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* ------------------------------------------------------------
-     SPARK GLOW — a soft warm halo behind spark elements
-     ------------------------------------------------------------ */
   .spark-glow {
     box-shadow: var(--shadow-spark);
   }
 
-  /* ------------------------------------------------------------
-     FADE MASK — used by horizontal carousels
-     ------------------------------------------------------------ */
   .mask-fade-right {
-    mask-image: linear-gradient(
-      to right,
-      black 0%,
-      black calc(100% - 3rem),
-      transparent 100%
-    );
+    mask-image: linear-gradient(to right, black 0%, black calc(100% - 3rem), transparent 100%);
+  }
+  .mask-fade-both {
+    mask-image: linear-gradient(to right, transparent 0%, black 3rem, black calc(100% - 3rem), transparent 100%);
   }
 
-  .mask-fade-both {
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 3rem,
-      black calc(100% - 3rem),
-      transparent 100%
+  /* Celestial gradient text — for hero accents */
+  .celestial-gradient-text {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-900) 0%,
+      var(--color-primary-700) 45%,
+      var(--color-spark) 100%
     );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Celestial starfield background — subtle twinkling dots */
+  .celestial-bg {
+    background:
+      radial-gradient(ellipse at top, rgba(139, 123, 165, 0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at bottom, rgba(244, 199, 122, 0.08) 0%, transparent 60%), var(--color-primary-900);
   }
 }
 
-/* ============================================================
-   COMPONENT HELPERS
-   Small style objects that Tailwind classes express awkwardly.
-   ============================================================ */
 @layer components {
-  /* ------------------------------------------------------------
-     DIVIDER WITH TEXT — "or" between auth methods
-     ------------------------------------------------------------ */
   .divider-with-text {
     display: flex;
     align-items: center;
@@ -118,37 +91,26 @@
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
-
   .divider-with-text::before,
   .divider-with-text::after {
-    content: '';
+    content: "";
     flex: 1;
     height: 1px;
     background: var(--color-border);
   }
 
-  /* ------------------------------------------------------------
-     GRADIENT TEXT — for hero accents
-     ------------------------------------------------------------ */
   .gradient-text {
-    background: linear-gradient(
-      135deg,
-      var(--color-primary-900) 0%,
-      var(--color-primary-500) 100%
-    );
+    background: linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  /* ------------------------------------------------------------
-     SKELETON — loading placeholder shimmer
-     ------------------------------------------------------------ */
   .skeleton {
     background: linear-gradient(
       90deg,
       var(--color-background-muted) 0%,
-      var(--color-primary-100) 50%,
+      var(--color-primary-200) 50%,
       var(--color-background-muted) 100%
     );
     background-size: 200% 100%;

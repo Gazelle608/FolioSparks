@@ -5,7 +5,7 @@ import type { Chapter } from "../../types/chapter";
 import { publishChapter, scheduleChapter, unpublishChapter, updateChapter } from "../../api/chapters";
 import { Button, Input, useToast } from "../ui";
 import { RichTextToolbar } from "./richtexttoolbar";
-import { WordCounter } from "./WordCounter";
+import { WordCounter } from "./wordcount";
 
 interface ChapterEditorProps {
   chapter: Chapter;
@@ -55,9 +55,10 @@ export function ChapterEditor({
         return;
       }
 
-      setSavedChapter(result.data!);
+      const nextChapter: Chapter = { ...savedChapter, ...result.data! };
+      setSavedChapter(nextChapter);
       setSaveState("saved");
-      onSaved?.(result.data!);
+      onSaved?.(nextChapter);
 
       // Reset the "Saved" badge after a moment
       setTimeout(() => setSaveState("idle"), 2000);
@@ -130,7 +131,7 @@ export function ChapterEditor({
       return;
     }
 
-    setSavedChapter(result.data!);
+    setSavedChapter(current => ({ ...current, ...result.data! }));
     toast.success("Chapter published");
 
     if (onAttachPoll) {
@@ -149,7 +150,7 @@ export function ChapterEditor({
       return;
     }
 
-    setSavedChapter(result.data!);
+    setSavedChapter(current => ({ ...current, ...result.data! }));
     toast.success("Chapter unpublished");
   };
 
@@ -167,7 +168,7 @@ export function ChapterEditor({
       return;
     }
 
-    setSavedChapter(result.data!);
+    setSavedChapter(current => ({ ...current, ...result.data! }));
     setScheduleOpen(false);
     toast.success("Chapter scheduled");
   };

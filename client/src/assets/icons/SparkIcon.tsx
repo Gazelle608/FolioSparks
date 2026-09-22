@@ -1,4 +1,4 @@
-import type { SVGProps } from 'react';
+import type { SVGProps } from "react";
 
 interface SparkIconProps extends SVGProps<SVGSVGElement> {
   size?: number;

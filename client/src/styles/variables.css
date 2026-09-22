@@ -1,98 +1,91 @@
 /* ============================================================
    FolioSparks — Design Tokens
-   The single source of truth for colors, spacing, radii, fonts.
-   Tailwind mirrors these in tailwind.config.js so `bg-primary-500`
-   and `var(--color-primary-500)` stay in sync.
+   Celestial palette: Navy Blue + Dusty Purple + Sparkle Gold
    ============================================================ */
 
 :root {
   /* ------------------------------------------------------------
-     PRIMARY — Deep greens
-     The brand foundation. Used for text, headers, dark sections.
+     PRIMARY — Celestial Navy
      ------------------------------------------------------------ */
-  --color-primary-50:  #DAF1DE;
-  --color-primary-100: #C5E4CB;
-  --color-primary-200: #9CCDAA;
-  --color-primary-300: #8EB69B;
-  --color-primary-400: #6A9A7A;
-  --color-primary-500: #235347;
-  --color-primary-600: #1A4036;
-  --color-primary-700: #163832;
-  --color-primary-800: #0B2B26;
-  --color-primary-900: #051F20;
+  --color-primary-50: #f0eef6;
+  --color-primary-100: #e8e4ef;
+  --color-primary-200: #c7c1dc;
+  --color-primary-300: #a69bc2;
+  --color-primary-400: #8b7ba5;
+  --color-primary-500: #5a6493;
+  --color-primary-600: #3e4779;
+  --color-primary-700: #2a3566;
+  --color-primary-800: #1a2255;
+  --color-primary-900: #0a0f2c;
 
   /* ------------------------------------------------------------
-     ACCENT — Soft mint
-     Used for secondary UI, muted text, dividers.
+     ACCENT — Dusty Purple / Slate
      ------------------------------------------------------------ */
-  --color-accent-light:   #DAF1DE;
-  --color-accent:         #8EB69B;
-  --color-accent-dark:    #235347;
+  --color-accent-light: #c7c1dc;
+  --color-accent: #8b7ba5;
+  --color-accent-dark: #5a6493;
 
   /* ------------------------------------------------------------
-     SPARK — The one warm accent
-     Reserved for Sparks currency + upsell moments. Do not
-     reuse this for generic success/error states.
+     SPARK — Celestial Gold
+     Reserved for the Sparks currency + upsell moments.
      ------------------------------------------------------------ */
-  --color-spark:         #FFD966;
-  --color-spark-light:   #FFE9A8;
-  --color-spark-dark:    #E5B93F;
+  --color-spark: #f4c77a;
+  --color-spark-light: #f9dda8;
+  --color-spark-dark: #d9a552;
 
   /* ------------------------------------------------------------
-     SEMANTIC — System states
+     SEMANTIC
      ------------------------------------------------------------ */
-  --color-danger:  #B91C1C;
-  --color-success: #235347;
-  --color-warning: #D97706;
-  --color-info:    #0369A1;
+  --color-danger: #b91c1c;
+  --color-success: #3e4779;
+  --color-warning: #d97706;
+  --color-info: #4a5ba8;
 
   /* ------------------------------------------------------------
      SURFACES
      ------------------------------------------------------------ */
-  --color-background:      #DAF1DE; /* page bg */
-  --color-background-alt:  #FFFFFF; /* cards */
-  --color-background-muted:#F3F7F4; /* hover fills */
-  --color-border:          #C5E4CB;
-  --color-border-strong:   #8EB69B;
+  --color-background: #e8e4ef;
+  --color-background-alt: #ffffff;
+  --color-background-muted: #f0eef6;
+  --color-border: #c7c1dc;
+  --color-border-strong: #a69bc2;
 
   /* ------------------------------------------------------------
      TEXT
      ------------------------------------------------------------ */
-  --color-text-primary:    #051F20;
-  --color-text-secondary:  #163832;
-  --color-text-muted:      #6A9A7A;
-  --color-text-inverse:    #DAF1DE;
+  --color-text-primary: #0a0f2c;
+  --color-text-secondary: #2a3566;
+  --color-text-muted: #5a6493;
+  --color-text-inverse: #e8e4ef;
 
   /* ------------------------------------------------------------
      TYPOGRAPHY
      ------------------------------------------------------------ */
-  --font-display: 'Merriweather', Georgia, 'Times New Roman', serif;
-  --font-body:    'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-mono:    ui-monospace, 'SF Mono', Menlo, Monaco, monospace;
+  --font-display: "Merriweather", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Monaco, monospace;
 
-  /* Type scale (rem-based) */
-  --text-xs:   0.75rem;   /* 12px */
-  --text-sm:   0.875rem;  /* 14px */
-  --text-base: 1rem;      /* 16px */
-  --text-lg:   1.125rem;  /* 18px */
-  --text-xl:   1.25rem;   /* 20px */
-  --text-2xl:  1.5rem;    /* 24px */
-  --text-3xl:  1.875rem;  /* 30px */
-  --text-4xl:  2.25rem;   /* 36px */
-  --text-5xl:  3rem;      /* 48px */
-  --text-6xl:  3.75rem;   /* 60px */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
 
   /* ------------------------------------------------------------
      SPACING
-     Tailwind already provides these; listed for JS access.
      ------------------------------------------------------------ */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-5:  1.25rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
@@ -101,87 +94,63 @@
   /* ------------------------------------------------------------
      RADII
      ------------------------------------------------------------ */
-  --radius-sm:   6px;
-  --radius-md:   10px;
-  --radius-lg:   16px;
-  --radius-xl:   24px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
   --radius-full: 9999px;
 
   /* ------------------------------------------------------------
      SHADOWS
      ------------------------------------------------------------ */
-  --shadow-sm:   0 1px 2px rgba(5, 31, 32, 0.05);
-  --shadow-md:   0 4px 12px rgba(5, 31, 32, 0.08);
-  --shadow-lg:   0 12px 32px rgba(5, 31, 32, 0.12);
-  --shadow-xl:   0 24px 48px rgba(5, 31, 32, 0.16);
-  --shadow-spark:0 4px 16px rgba(255, 217, 102, 0.4);
+  --shadow-sm: 0 1px 2px rgba(10, 15, 44, 0.06);
+  --shadow-md: 0 4px 12px rgba(10, 15, 44, 0.1);
+  --shadow-lg: 0 12px 32px rgba(10, 15, 44, 0.14);
+  --shadow-xl: 0 24px 48px rgba(10, 15, 44, 0.18);
+  --shadow-spark: 0 4px 16px rgba(244, 199, 122, 0.45);
 
   /* ------------------------------------------------------------
      ANIMATION
      ------------------------------------------------------------ */
-  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast:   150ms;
+  --duration-fast: 150ms;
   --duration-normal: 250ms;
-  --duration-slow:   400ms;
+  --duration-slow: 400ms;
 
   /* ------------------------------------------------------------
      LAYOUT
      ------------------------------------------------------------ */
-  --navbar-height: 4rem; /* 64px — matches h-16 in Navbar */
-  --reader-max-width: 42rem; /* 672px — reading column */
+  --navbar-height: 4rem;
+  --reader-max-width: 42rem;
 
   /* ------------------------------------------------------------
      Z-INDEX LADDER
      ------------------------------------------------------------ */
-  --z-base:     0;
+  --z-base: 0;
   --z-dropdown: 20;
-  --z-sticky:   30;
-  --z-navbar:   40;
-  --z-modal:    50;
-  --z-toast:    100;
+  --z-sticky: 30;
+  --z-navbar: 40;
+  --z-modal: 50;
+  --z-toast: 100;
 }
 
 /* ============================================================
-   DARK MODE
-   Applied when ThemeContext sets <html data-theme="dark">.
-   Palette inverts: deep green becomes background, mint becomes text.
+   READER THEMES — three reading modes for the chapter reader
    ============================================================ */
-[data-theme='dark'] {
-  /* Surfaces swap */
-  --color-background:       #051F20;
-  --color-background-alt:   #0B2B26;
-  --color-background-muted: #163832;
-  --color-border:           #1A4036;
-  --color-border-strong:    #235347;
+:root {
+  --reader-theme-light-bg: #ffffff;
+  --reader-theme-light-text: #0a0f2c;
+  --reader-theme-light-muted: #5a6493;
+  --reader-theme-light-border: #c7c1dc;
 
-  /* Text swaps */
-  --color-text-primary:   #DAF1DE;
-  --color-text-secondary: #C5E4CB;
-  --color-text-muted:     #8EB69B;
-  --color-text-inverse:   #051F20;
+  --reader-theme-sepia-bg: #f5efe0;
+  --reader-theme-sepia-text: #3e2f1c;
+  --reader-theme-sepia-muted: #8a7654;
+  --reader-theme-sepia-border: #ddd0b5;
 
-  /* Shadows get softer in dark */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
-}
-
-/* ============================================================
-   SYSTEM PREFERENCE
-   When ThemeContext uses 'system', it resolves to the OS preference
-   and sets data-theme accordingly. These rules handle the transition.
-   ============================================================ */
-@media (prefers-color-scheme: dark) {
-  [data-theme='system'] {
-    --color-background:       #051F20;
-    --color-background-alt:   #0B2B26;
-    --color-background-muted: #163832;
-    --color-border:           #1A4036;
-    --color-border-strong:    #235347;
-    --color-text-primary:     #DAF1DE;
-    --color-text-secondary:   #C5E4CB;
-    --color-text-muted:       #8EB69B;
-    --color-text-inverse:     #051F20;
-  }
+  --reader-theme-dark-bg: #0a0f2c;
+  --reader-theme-dark-text: #e8e4ef;
+  --reader-theme-dark-muted: #a69bc2;
+  --reader-theme-dark-border: #1a2255;
 }

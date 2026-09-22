@@ -6,14 +6,10 @@ import {
   useState,
 } from "react";
 
-// ---------------------------------------------------------------------------
-// Types
-// ---------------------------------------------------------------------------
 export type ThemeMode = "light" | "dark" | "system";
 
 interface ThemeContextValue {
   mode: ThemeMode;
-  /** Resolved theme — "light" or "dark" after resolving "system" */
   resolved: "light" | "dark";
   setMode: (mode: ThemeMode) => void;
   toggle: () => void;
@@ -23,50 +19,25 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 const STORAGE_KEY = "foliosparks:theme";
 
-// ---------------------------------------------------------------------------
-// Helpers
-// ---------------------------------------------------------------------------
-function getSystemTheme(): "light" | "dark" {
-  if (typeof window === "undefined")
-    return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-}
-
 function readStoredMode(): ThemeMode {
   if (typeof window === "undefined")
-    return "system";
+    return "light";
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === "light" || stored === "dark" || stored === "system")
     return stored;
-  return "system";
+  return "light";
 }
 
-// ---------------------------------------------------------------------------
-// Provider
-// ---------------------------------------------------------------------------
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [mode, setModeState] = useState<ThemeMode>(readStoredMode);
-  const [systemTheme, setSystemTheme] = useState<"light" | "dark">(getSystemTheme);
 
-  // Listen to OS theme changes
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = (e: MediaQueryListEvent) => {
-      setSystemTheme(e.matches ? "dark" : "light");
-    };
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+  // Force light for now — the celestial palette is designed light-first
+  const resolved: "light" | "dark" = "light";
 
-  const resolved: "light" | "dark" = mode === "system" ? systemTheme : mode;
-
-  // Apply to <html> so CSS variables cascade
   useEffect(() => {
     const root = document.documentElement;
     root.dataset.theme = resolved;
-    root.classList.toggle("dark", resolved === "dark");
+    root.classList.remove("dark");
   }, [resolved]);
 
   const setMode = (next: ThemeMode) => {
@@ -74,13 +45,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     try {
       localStorage.setItem(STORAGE_KEY, next);
     }
-    catch {
-      /* ignore */
-    }
+    catch {}
   };
 
   const toggle = () => {
-    setMode(resolved === "dark" ? "light" : "dark");
+    // No-op for now — kept for API compatibility
   };
 
   return (
@@ -90,9 +59,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// ---------------------------------------------------------------------------
-// Hook
-// ---------------------------------------------------------------------------
 export function useTheme(): ThemeContextValue {
   const ctx = useContext(ThemeContext);
   if (!ctx)

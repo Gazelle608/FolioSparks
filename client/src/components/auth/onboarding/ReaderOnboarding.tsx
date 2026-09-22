@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { completeOnboarding } from "../../../api/auth";
 import { SparkFilledIcon } from "../../../assets/icons";
 import { useAuth } from "../../../hooks/useauth";
+import { POST_AUTH_PATH } from "../../../utils/postauth";
 import { Button, Card } from "../../ui";
 
 export function ReaderOnboarding() {
@@ -27,7 +28,8 @@ export function ReaderOnboarding() {
     }
 
     await refreshProfile();
-    navigate("/library", { replace: true });
+    // /dashboard resolves to /me/library for readers
+    navigate(POST_AUTH_PATH, { replace: true });
   };
 
   return (

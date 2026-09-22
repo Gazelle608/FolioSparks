@@ -6,6 +6,7 @@ import { createAuthor } from "../../../api/authors";
 import { createDonationLink } from "../../../api/donations";
 import { SparkOutlineIcon } from "../../../assets/icons";
 import { useAuth } from "../../../hooks/useauth";
+import { POST_AUTH_PATH } from "../../../utils/postauth";
 import { Button, Card, Input } from "../../ui";
 import {
   type DonationLinkDraft,
@@ -120,7 +121,8 @@ export function AuthorOnboarding() {
     }
 
     await refreshProfile();
-    navigate("/studio", { replace: true });
+    // /dashboard resolves to /studio (authors) or /me/library (readers)
+    navigate(POST_AUTH_PATH, { replace: true });
   };
 
   // -------------------------------------------------------------------------

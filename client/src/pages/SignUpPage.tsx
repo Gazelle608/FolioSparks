@@ -3,10 +3,11 @@ import { useSearchParams } from "react-router-dom";
 import { SparkFilledIcon } from "../assets/icons";
 import { SignupForm } from "../components/auth";
 import { Container } from "../components/layout";
+import { POST_AUTH_PATH, safeNextPath } from "../utils/postauth";
 
 export function SignUpPage() {
   const [params] = useSearchParams();
-  const next = params.get("next") ?? "/onboarding";
+  const next = safeNextPath(params.get("next")) ?? POST_AUTH_PATH;
 
   return (
     <div className="min-h-screen flex flex-col bg-primary-50">

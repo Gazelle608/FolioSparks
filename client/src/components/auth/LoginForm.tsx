@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { signIn } from "../../api/auth";
 import { Button, Input } from "../ui";
+import { POST_AUTH_PATH } from "../../utils/postauth";
 import { GoogleAuthButton } from "./googleauthbutton";
 
 interface LoginFormProps {
@@ -10,7 +11,7 @@ interface LoginFormProps {
   onSuccess?: () => void;
 }
 
-export function LoginForm({ redirectTo = "/", onSuccess }: LoginFormProps) {
+export function LoginForm({ redirectTo = POST_AUTH_PATH, onSuccess }: LoginFormProps) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

@@ -8,6 +8,7 @@ import {
   useEffect,
   useMemo,
   useState,
+  useRef,
 } from "react";
 
 import type { Profile } from "../types/user";
@@ -24,7 +25,7 @@ interface AuthContextValue {
   user: User | null;
   profile: Profile | null;
   isAuthor: boolean;
-  /** True until the first session resolution completes */
+  /** True while the session (and its profile row) is still settling */
   loading: boolean;
   /** True while refreshing profile data */
   refreshing: boolean;
@@ -47,6 +48,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+
+  // Tracks the user the current profile belongs to, so we can tell a fresh
+  // sign-in (profile still loading → hold `loading`) from a token refresh.
+  const lastUserId = useRef<string | null>(null);
 
   // ---------------------------------------------------------------------------
   // Load profile whenever the user changes
@@ -97,19 +102,38 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // 2. Subscribe to future changes
     const { data: sub } = supabase.auth.onAuthStateChange(
-      async (_event, newSession) => {
+      (_event, newSession) => {
         if (!mounted)
           return;
 
         setSession(newSession);
         setUser(newSession?.user ?? null);
 
-        if (newSession?.user) {
-          await loadProfile(newSession.user.id);
-        }
-        else {
+        if (!newSession?.user) {
+          lastUserId.current = null;
           setProfile(null);
+          setLoading(false);
+          return;
         }
+
+        // A *new* sign-in: keep `loading` true until the profile row lands,
+        // so route guards don't bounce an onboarded user to /onboarding.
+        const isNewUser = lastUserId.current !== newSession.user.id;
+        lastUserId.current = newSession.user.id;
+        if (isNewUser)
+          setLoading(true);
+
+        // Deferred out of the callback on purpose: auth-js holds a lock while
+        // emitting, so awaiting a Supabase query inline can deadlock.
+        window.setTimeout(() => {
+          if (!mounted)
+            return;
+
+          void loadProfile(newSession.user.id).finally(() => {
+            if (mounted && isNewUser)
+              setLoading(false);
+          });
+        }, 0);
       },
     );
 

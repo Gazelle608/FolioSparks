@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { signInWithGoogle } from "../../api/auth";
+import { POST_AUTH_PATH } from "../../utils/postauth";
 import { Button } from "../ui";
 
 interface GoogleAuthButtonProps {
@@ -11,7 +12,7 @@ interface GoogleAuthButtonProps {
 }
 
 export function GoogleAuthButton({
-  redirectTo = "/onboarding",
+  redirectTo = POST_AUTH_PATH,
   label = "Continue with Google",
 }: GoogleAuthButtonProps) {
   const [loading, setLoading] = useState(false);
@@ -21,10 +22,9 @@ export function GoogleAuthButton({
     setLoading(true);
     setError(null);
 
-    // Stash the redirect target so we can bounce back after OAuth
-    sessionStorage.setItem("postAuthRedirect", redirectTo);
-
-    const result = await signInWithGoogle();
+    // The target rides along in the OAuth callback URL (?next=…), so the
+    // round trip needs no stashed state.
+    const result = await signInWithGoogle(redirectTo);
 
     // On success, Supabase redirects the browser — this line only runs on error
     if (result.error) {

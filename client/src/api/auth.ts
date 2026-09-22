@@ -1,5 +1,7 @@
 import type { Session, User } from "@supabase/supabase-js";
 
+import { buildAuthCallbackUrl } from "../utils/postauth";
+
 import { type ApiResult, err, ok, supabase } from "./supabase";
 
 type Profile = Record<string, unknown>;
@@ -25,7 +27,7 @@ export async function signUp(
         username: input.username.toLowerCase(),
         display_name: input.displayName,
       },
-      emailRedirectTo: `${window.location.origin}/auth/callback`,
+      emailRedirectTo: buildAuthCallbackUrl(),
     },
   });
 
@@ -54,13 +56,34 @@ export async function signIn(
 // ---------------------------------------------------------------------------
 // Google OAuth
 // ---------------------------------------------------------------------------
-export async function signInWithGoogle(): Promise<ApiResult<null>> {
+export async function signInWithGoogle(
+  nextPath?: string | null,
+): Promise<ApiResult<null>> {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: `${window.location.origin}/auth/callback`,
+      // The `next` target rides along in the callback URL so we don't need
+      // to stash anything in sessionStorage for the round trip.
+      redirectTo: buildAuthCallbackUrl(nextPath),
       queryParams: { access_type: "offline", prompt: "consent" },
     },
+  });
+
+  if (error)
+    return err(error.message);
+  return ok(null);
+}
+
+// ---------------------------------------------------------------------------
+// Resend the signup confirmation email
+// ---------------------------------------------------------------------------
+export async function resendVerificationEmail(
+  email: string,
+): Promise<ApiResult<null>> {
+  const { error } = await supabase.auth.resend({
+    type: "signup",
+    email,
+    options: { emailRedirectTo: buildAuthCallbackUrl() },
   });
 
   if (error)

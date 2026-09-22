@@ -103,8 +103,6 @@ export const STORAGE_KEYS = {
   audioVolume: "foliosparks:audio-volume",
   audioRate: "foliosparks:audio-rate",
   auth: "foliosparks-auth",
-  postAuthRedirect: "postAuthRedirect",
-  pendingEmail: "pendingEmail",
 } as const;
 
 // ---------------------------------------------------------------------------
@@ -122,6 +120,14 @@ export const ROUTES = {
   studioNew: "/studio/new",
   donationSettings: "/studio/settings/donations",
   readerLibrary: "/me/library",
+
+  // Auth hand-offs
+  /** Post-auth landing — resolves to /studio, /me/library or /onboarding */
+  dashboard: "/dashboard",
+  /** Supabase redirect target for email links + Google OAuth */
+  authCallback: "/auth/callback",
+  /** "Check your inbox" after sign-up when confirmation is required */
+  verifyEmail: "/verify-email",
 
   // Dynamic builders
   story: (slug: string) => `/story/${slug}`,

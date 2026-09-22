@@ -3,16 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { signUp } from "../../api/auth";
 import { Button, Input } from "../ui";
+import { POST_AUTH_PATH, VERIFY_EMAIL_PATH } from "../../utils/postauth";
 import { GoogleAuthButton } from "./googleauthbutton";
 
 interface SignupFormProps {
-  /** Where to send users after signup (defaults to onboarding) */
+  /** Where to send users after signup (defaults to the dashboard resolver) */
   redirectTo?: string;
 }
 
 const USERNAME_REGEX = /^[a-z0-9_]{3,24}$/;
 
-export function SignupForm({ redirectTo = "/onboarding" }: SignupFormProps) {
+export function SignupForm({ redirectTo = POST_AUTH_PATH }: SignupFormProps) {
   const navigate = useNavigate();
 
   const [displayName, setDisplayName] = useState("");
@@ -82,10 +83,11 @@ export function SignupForm({ redirectTo = "/onboarding" }: SignupFormProps) {
       return;
     }
 
-    // If email confirmation is required, session is null.
+    // If email confirmation is required, session is null — hand the address
+    // to the "check your inbox" page instead of dead-ending.
     if (!result.data?.session) {
-      sessionStorage.setItem("pendingEmail", email.trim());
-      navigate("/verify-email", { replace: true });
+      const params = new URLSearchParams({ email: email.trim() });
+      navigate(`${VERIFY_EMAIL_PATH}?${params.toString()}`, { replace: true });
       return;
     }
 

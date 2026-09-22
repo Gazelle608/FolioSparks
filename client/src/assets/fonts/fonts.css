@@ -1,8 +1,3 @@
-/* ============================================================
-   FolioSparks — Self-hosted fonts
-   Loaded via @font-face. Referenced from styles/globals.css.
-   ============================================================ */
-
 /* ------------------------------------------------------------
    Merriweather — display serif
    Used for: headings, story titles, reader body text
@@ -30,7 +25,7 @@
    ------------------------------------------------------------ */
 @font-face {
   font-family: "Inter";
-  src: url("./Inter-Variable.woff2") format("woff2-variations");
+  src: url("./Inter-Variable.woff2") format("woff2");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

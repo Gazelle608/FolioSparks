@@ -3,29 +3,29 @@
 // Every component the /studio routes and author pages need.
 // ---------------------------------------------------------------------------
 
-export { ChapterBreakdown } from "./ChapterBreakdown";
-export { ChapterByChapterUpload } from "./ChapterByChapterUpload";
+export { ChapterBreakdown } from "./chapterbreakdown";
+export { ChapterByChapterUpload } from "./chapterbychapterupload";
 
 // Chapter editing
-export { ChapterEditor } from "./ChapterEditor";
+export { ChapterEditor } from "./chaptereditor";
 
 // Story creation
 export { CreateStoryForm } from "./createstoryform";
 // Settings
-export { DonationLinkEditor } from "./DonationLinkEditor";
-export { DraftSaver } from "./DraftSaver";
-export { FullManuscriptUpload } from "./FullManuscriptUpload";
+export { DonationLinkEditor } from "./donationlinkeditor";
+export { DraftSaver } from "./draftsaver";
+export { FullManuscriptUpload } from "./fullmanuscriptupload";
 // Publishing flow
-export { PublishChoice } from "./PublishChoice";
+export { PublishChoice } from "./publishchoice";
 
-export { PublishPreview } from "./PublishPreview";
-export { ReadershipChart } from "./ReadershipChart";
-export { RevenueReport } from "./RevenueReport";
+export { PublishPreview } from "./publishpreview";
+export { ReadershipChart } from "./readershipchart";
+export { RevenueReport } from "./revenuereport";
 export { RichTextToolbar } from "./richtexttoolbar";
 
-export { SchedulePublish } from "./SchedulePublish";
+export { SchedulePublish } from "./schedulepublish";
 // Analytics
-export { SparksChart } from "./SparksChart";
+export { SparksChart } from "./sparkschart";
 export { StoryDraftList } from "./storydraftlist";
 // Dashboard & navigation
 export { StudioStats } from "./studiostats";

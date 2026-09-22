@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 
 import { z } from "zod";
 
-import * as sparksService from "../services/sparksService.js";
+import * as sparksService from "../services/sparksservice.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { HttpError } from "../utils/errors.js";
 

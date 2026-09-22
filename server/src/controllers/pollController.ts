@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 
 import { z } from "zod";
 
-import * as pollService from "../services/pollService.js";
+import * as pollService from "../services/pollservice.js";
 import * as storyService from "../services/storyService.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { HttpError } from "../utils/errors.js";

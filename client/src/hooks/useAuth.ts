@@ -4,4 +4,4 @@
  * Returns session, user, profile, isAuthor, loading, refreshProfile, signOut.
  * See contexts/AuthContext.tsx for the full implementation.
  */
-export { useAuth } from "../contexts/AuthContext";
+export { useAuth } from "../contexts/authcontext";

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useauth';
-import { useMembership } from '../hooks/useMembership';
-import { useSparks } from '../hooks/useSparks';
+import { useMembership } from '../hooks/usemembership';
+import { useSparks } from '../hooks/usesparks';
 import { PageWrapper } from '../components/layout';
 import { PricingTiers, SparksAllowanceDisplay } from '../components/membership';
 import { SparkFilledIcon } from '../assets/icons';

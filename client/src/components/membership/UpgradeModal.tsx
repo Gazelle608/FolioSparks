@@ -4,7 +4,7 @@ import type { MembershipTier } from "../../types/membership";
 
 import { createCheckoutSession } from "../../api/memberships";
 import { SparkFilledIcon } from "../../assets/icons";
-import { Button, Modal, useToast } from "../ui";
+import { Button, Modal } from "../ui";
 
 interface Tier {
   id: MembershipTier;
@@ -28,7 +28,6 @@ export function UpgradeModal({
   tier,
   currentTier,
 }: UpgradeModalProps) {
-  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

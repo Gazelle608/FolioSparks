@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 
 import * as analyticsService from "../services/analyticsservice.js";
-import * as storyService from "../services/storyService.js";
+import * as storyService from "../services/storyservice.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { HttpError } from "../utils/errors.js";
 
@@ -13,7 +13,9 @@ export const story = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user)
     throw HttpError.unauthorized();
 
-  const storyId = req.params.storyId!;
+  const storyId = Array.isArray(req.params.storyId)
+    ? req.params.storyId[0]
+    : req.params.storyId;
   const s = await storyService.getById(storyId);
   if (!s)
     throw HttpError.notFound("Story not found");
@@ -45,7 +47,9 @@ export const sparksSeries = asyncHandler(
     if (!req.user)
       throw HttpError.unauthorized();
 
-    const storyId = req.params.storyId!;
+    const storyId = Array.isArray(req.params.storyId)
+      ? req.params.storyId[0]
+      : req.params.storyId;
     const s = await storyService.getById(storyId);
     if (!s)
       throw HttpError.notFound("Story not found");
@@ -67,7 +71,9 @@ export const chapterBreakdown = asyncHandler(
     if (!req.user)
       throw HttpError.unauthorized();
 
-    const storyId = req.params.storyId!;
+    const storyId = Array.isArray(req.params.storyId)
+      ? req.params.storyId[0]
+      : req.params.storyId;
     const s = await storyService.getById(storyId);
     if (!s)
       throw HttpError.notFound("Story not found");

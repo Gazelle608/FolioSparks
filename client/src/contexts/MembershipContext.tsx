@@ -12,7 +12,7 @@ import type { Membership, MembershipTier } from "../types/membership";
 
 import { getMembership } from "../api/memberships";
 import { supabase } from "../api/supabase";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./authcontext";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -77,7 +77,7 @@ export function MembershipProvider({ children }: { children: ReactNode }) {
       setMembership(null);
     }
     else {
-      setMembership(result.data);
+      setMembership(result.data as unknown as Membership);
     }
 
     setLoading(false);

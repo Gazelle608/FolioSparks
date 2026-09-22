@@ -4,4 +4,4 @@
  * Returns balance, ledger, spend(), refresh(), loadMoreLedger(), hasMoreLedger.
  * See contexts/SparksContext.tsx for the full implementation.
  */
-export { useSparks } from "../contexts/SparksContext";
+export { useSparks } from "../contexts/sparkscontext";

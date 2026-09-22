@@ -1,21 +1,21 @@
-export { useAudio } from "./useAudio";
-export type { AudioState, NowPlaying } from "./useAudio";
+export { useAudio } from "./useaudio";
+export type { AudioState, NowPlaying } from "./useaudio";
 // Context re-exports
 export { useAuth } from "./useauth";
-export { useChapter } from "./useChapter";
+export { useChapter } from "./usechapter";
 export {
   useDeskManagement,
   useMyInvites,
   useStoryDesk,
   useSubmitDraft,
-} from "./useDesk";
+} from "./usedesk";
 
 // Utilities
-export { useLocalStorage } from "./useLocalStorage";
+export { useLocalStorage } from "./uselocalstorage";
 
-export { useMembership } from "./useMembership";
-export { useChapterPoll, useStoryPolls } from "./usePolls";
-export { useReadingProgress } from "./useReadingProgress";
-export { useSparks } from "./useSparks";
+export { useMembership } from "./usemembership";
+export { useChapterPoll, useStoryPolls } from "./usepolls";
+export { useReadingProgress } from "./usereadingprogress";
+export { useSparks } from "./usesparks";
 // Data hooks
-export { useAuthorStories, useBurningNow, useStories } from "./useStories";
+export { useAuthorStories, useBurningNow, useStories } from "./usestories";

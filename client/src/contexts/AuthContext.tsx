@@ -62,7 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setProfile(null);
     }
     else {
-      setProfile(result.data);
+      setProfile(result.data as unknown as Profile);
     }
 
     if (isRefresh)

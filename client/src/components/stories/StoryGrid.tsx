@@ -1,8 +1,8 @@
 import type { StoryCardData } from "../../types/story";
 
 import { SparkOutlineIcon } from "../../assets/icons";
-import { EmptyState, Spinner } from "../ui";
-import { StoryCard } from "./StoryCard";
+import { Spinner } from "../ui";
+import { StoryCard } from "./storycard";
 
 interface StoryGridProps {
   stories: StoryCardData[];
@@ -49,12 +49,12 @@ export function StoryGrid({
   // Empty
   if (stories.length === 0) {
     return (
-      <EmptyState
-        icon={<SparkOutlineIcon size={48} />}
-        title={emptyTitle}
-        description={emptyDescription}
-        action={emptyAction}
-      />
+      <div className="flex flex-col items-center justify-center py-16 text-center">
+        <SparkOutlineIcon size={48} />
+        <h2 className="mt-4 text-lg font-semibold">{emptyTitle}</h2>
+        <p className="mt-2 text-sm text-muted-foreground">{emptyDescription}</p>
+        {emptyAction && <div className="mt-4">{emptyAction}</div>}
+      </div>
     );
   }
 

@@ -13,9 +13,9 @@ import {
 import { PollIcon, SparkOutlineIcon } from "../../assets/icons";
 import { useAuth } from "../../hooks/useauth";
 import { Button, Card, Spinner, TabPanel, Tabs, useToast } from "../ui";
-import { ChapterByChapterUpload } from "./ChapterByChapterUpload";
-import { FullManuscriptUpload } from "./FullManuscriptUpload";
-import { PublishChoice } from "./PublishChoice";
+import { ChapterByChapterUpload } from "./chapterbychapterupload";
+import { FullManuscriptUpload } from "./fullmanuscriptupload";
+import { PublishChoice } from "./publishchoice";
 import { StoryDraftList } from "./storydraftlist";
 import { StudioStats } from "./studiostats";
 
@@ -56,7 +56,7 @@ function StoryList() {
     setLoading(true);
     const result = await getStoriesByAuthor(user.id, true);
     if (result.data)
-      setStories(result.data);
+      setStories(result.data as unknown as Story[]);
     setLoading(false);
   };
 
@@ -225,8 +225,10 @@ function StoryWorkspace({ storyId }: { storyId: string }) {
       return;
     }
 
-    setStory(storyRes.data!);
-    setChapters(chaptersRes.data ?? []);
+    // API response types are intentionally narrower than the complete studio
+    // models used by this workspace (which include computed counters/metadata).
+    setStory(storyRes.data as unknown as Story);
+    setChapters((chaptersRes.data ?? []) as unknown as Chapter[]);
     setLoading(false);
   };
 
@@ -438,9 +440,7 @@ function StoryWorkspace({ storyId }: { storyId: string }) {
 // CHAPTERS PANEL
 // ===========================================================================
 function ChaptersPanel({
-  story,
   chapters,
-  onReload,
   onOpenChapter,
 }: {
   story: Story;
@@ -448,8 +448,6 @@ function ChaptersPanel({
   onReload: () => void;
   onOpenChapter: (chapterNumber: number) => void;
 }) {
-  const toast = useToast();
-
   if (chapters.length === 0) {
     return (
       <Card className="p-8 text-center">

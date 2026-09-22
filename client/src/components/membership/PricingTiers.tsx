@@ -4,7 +4,7 @@ import type { MembershipTier } from "../../types/membership";
 
 import { SparkFilledIcon } from "../../assets/icons";
 import { Button, Card } from "../ui";
-import { UpgradeModal } from "./UpgradeModal";
+import { UpgradeModal } from "./upgrademodal";
 
 interface PricingTiersProps {
   /** Current user"s tier (or null if anonymous) */

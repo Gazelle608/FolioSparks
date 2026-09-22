@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useauth';
-import { useAuthorStories } from '../hooks/useStories';
-import { useSparks } from '../hooks/useSparks';
+import { useAuthorStories } from '../hooks/usestories';
+import { useSparks } from '../hooks/usesparks';
 import { deleteStory } from '../api/stories';
 import { PageWrapper } from '../components/layout';
 import { Button, Card, useToast } from '../components/ui';

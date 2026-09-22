@@ -1,5 +1,5 @@
-export { Container } from "./Container";
-export { Footer } from "./Footer";
-export { Navbar } from "./Navbar";
-export type { NavbarUser } from "./Navbar";
-export { PageWrapper } from "./PageWrapper";
+export { Container } from "./container";
+export { Footer } from "./footer";
+export { Navbar } from "./navbar";
+export type { NavbarUser } from "./navbar";
+export { PageWrapper } from "./pagewrapper";

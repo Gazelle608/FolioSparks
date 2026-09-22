@@ -3,7 +3,7 @@ import { type FormEvent, useState } from "react";
 import type { DeskInvite as Invite } from "../../types/desk";
 
 import { inviteToDesk } from "../../api/desks";
-import { Button, Input, Avatar, useToast } from "../ui";
+import { Avatar, Button, Input, useToast } from "../ui";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -153,7 +153,7 @@ export function DeskInvite({
           <Input
             placeholder="Username"
             value={username}
-            onChange={e => setUsername(e.target.value.replace(/[^a-z0-9_]/gi, ""))}
+            onChange={e => setUsername(e.target.value.replace(/\W/g, ""))}
             disabled={searching || !!foundUser}
             aria-label="Co-writer username"
           />

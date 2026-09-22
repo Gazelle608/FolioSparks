@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import type { Desk, DeskMember, DeskInvite as Invite, DeskSubmission } from "../../types/desk";
+import type { Desk, DeskMember, DeskSubmission, DeskInvite as Invite } from "../../types/desk";
 
 import {
   closeDesk,
@@ -12,9 +12,9 @@ import {
 import { DeskIcon } from "../../assets/icons";
 import { useAuth } from "../../hooks/useauth";
 import { Card, useToast } from "../ui";
-import { CoWriterList } from "./CoWriterList";
-import { DeskInvite } from "./DeskInvite";
-import { DeskSubmissionList } from "./DeskSubmission";
+import { CoWriterList } from "./cowriterlist";
+import { DeskInvite } from "./deskinvite";
+import { DeskSubmissionList } from "./desksubmission";
 
 // ---------------------------------------------------------------------------
 // Props
@@ -59,11 +59,11 @@ export function DeskCard({
       variant === "owner" ? getDeskSubmissions(desk.id) : Promise.resolve({ data: [] }),
     ]);
 
-    setMembers(membersRes.data ?? []);
+    setMembers((membersRes.data ?? []) as unknown as DeskMember[]);
     setPendingInvites(
-      (invitesRes.data ?? []).filter(i => i.desk_id === desk.id),
+      (invitesRes.data ?? []).filter(i => i.desk_id === desk.id) as unknown as Invite[],
     );
-    setSubmissions(submissionsRes.data ?? []);
+    setSubmissions((submissionsRes.data ?? []) as unknown as DeskSubmission[]);
     setLoading(false);
   };
 

@@ -15,7 +15,7 @@ import { Container } from "../components/layout";
 import { StoryHero, StoryTags } from "../components/stories";
 import { Button, Card, Spinner } from "../components/ui";
 import { useAuth } from "../hooks/useauth";
-import { useStoryDesk } from "../hooks/useDesk";
+import { useStoryDesk } from "../hooks/usedesk";
 
 const PUBLIC_CHAPTER_LIMIT = 3;
 
@@ -50,7 +50,7 @@ export function StoryPage() {
       }
 
       const s = storyResult.data;
-      setStory(s);
+      setStory(s as unknown as Story);
 
       const [chaptersRes, donationsRes] = await Promise.all([
         listChapters(String(s.id), false),
@@ -59,7 +59,7 @@ export function StoryPage() {
 
       if (cancelled)
         return;
-      setChapters(chaptersRes.data ?? []);
+      setChapters((chaptersRes.data ?? []) as unknown as Chapter[]);
       setDonations(donationsRes.data ?? []);
       setLoading(false);
     })();

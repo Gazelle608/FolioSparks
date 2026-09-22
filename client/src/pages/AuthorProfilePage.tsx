@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { supabase } from '../api/supabase';
-import { listDonationLinks } from '../api/donations';
-import { useAuthorStories } from '../hooks/useStories';
-import { PageWrapper } from '../components/layout';
-import { Avatar, Spinner } from '../components/ui';
-import { StoryGrid } from '../components/stories';
-import { DonationLinkList } from '../components/donation';
-import type { Profile } from '../types/user';
-import type { Author } from '../api/authors';
-import type { DonationLink } from '../types/donation';
-import type { StoryCardData } from '../types/story';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+import type { Author } from "../api/authors";
+import type { DonationLink } from "../types/donation";
+import type { StoryCardData } from "../types/story";
+import type { Profile } from "../types/user";
+
+import { listDonationLinks } from "../api/donations";
+import { supabase } from "../api/supabase";
+import { DonationLinkList } from "../components/donation";
+import { PageWrapper } from "../components/layout";
+import { StoryGrid } from "../components/stories";
+import { Avatar, Spinner } from "../components/ui";
+import { useAuthorStories } from "../hooks/usestories";
 
 export function AuthorProfilePage() {
   const { username } = useParams<{ username: string }>();
@@ -21,23 +23,26 @@ export function AuthorProfilePage() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
-  const cleanUsername = username?.replace(/^@/, '') ?? '';
+  const cleanUsername = username?.replace(/^@/, "") ?? "";
   const { stories } = useAuthorStories(profile?.id ?? null, false);
 
   useEffect(() => {
-    if (!cleanUsername) return;
+    if (!cleanUsername) {
+      return;
+    }
     let cancelled = false;
 
     (async () => {
       setLoading(true);
 
       const { data: prof, error } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('username', cleanUsername)
+        .from("profiles")
+        .select("*")
+        .eq("username", cleanUsername)
         .maybeSingle();
 
-      if (cancelled) return;
+      if (cancelled)
+        return;
 
       if (error || !prof) {
         setNotFound(true);
@@ -45,19 +50,26 @@ export function AuthorProfilePage() {
         return;
       }
 
-      setProfile(prof);
+      const profileData = prof as unknown as Profile;
+      setProfile(profileData);
 
       const { data: auth } = await supabase
-        .from('authors')
-        .select('*')
-        .eq('id', profile.id)
+        .from("authors")
+        .select("*")
+        .eq("id", profileData.id)
         .maybeSingle();
 
-      if (cancelled) return;
-      if (auth) setAuthor(auth);
+      if (cancelled) {
+        return;
+      }
+      if (auth) {
+        setAuthor(auth);
+      }
 
-      const donationsRes = await listDonationLinks(profile.id);
-      if (cancelled) return;
+      const donationsRes = await listDonationLinks(profileData.id);
+      if (cancelled) {
+        return;
+      }
       setDonations(donationsRes.data ?? []);
 
       setLoading(false);
@@ -80,7 +92,9 @@ export function AuthorProfilePage() {
     return (
       <PageWrapper title="Profile not found" size="md">
         <p className="text-center text-primary-500">
-          No user with the handle @{cleanUsername}.
+          No user with the handle @
+          {cleanUsername}
+          .
         </p>
       </PageWrapper>
     );
@@ -101,7 +115,8 @@ export function AuthorProfilePage() {
             {author?.pen_name ?? profile.display_name}
           </h1>
           <p className="mt-1 text-sm text-primary-300">
-            @{profile.username}
+            @
+            {profile.username}
           </p>
 
           {author?.tagline && (
@@ -157,9 +172,7 @@ export function AuthorProfilePage() {
             <h2 className="font-display text-lg font-bold text-primary-900">
               Stories
             </h2>
-            <span className="text-xs text-primary-400">
-              {stories.length}
-            </span>
+            <span className="text-xs text-primary-400">{stories.length}</span>
           </div>
 
           <StoryGrid

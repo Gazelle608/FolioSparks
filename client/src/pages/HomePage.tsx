@@ -13,7 +13,7 @@ import {
 import { Container } from "../components/layout";
 import { StoryGrid } from "../components/stories";
 import { Button, Card } from "../components/ui";
-import { useBurningNow } from "../hooks/useStories";
+import { useBurningNow } from "../hooks/usestories";
 
 export function HomePage() {
   const { stories, loading } = useBurningNow(6);

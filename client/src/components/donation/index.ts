@@ -1,5 +1,5 @@
-export { DonationBanner } from "./DonationBanner";
-export { DonationButton } from "./DonationButton";
-export { DonationLinkList } from "./DonationLinkList";
+export { DonationBanner } from "./donationbanner";
+export { DonationButton } from "./donationbutton";
+export { DonationLinkList } from "./donationlinklist";
 export { getPlatformMeta, PLATFORMS } from "./platforms";
 export type { PlatformMeta } from "./platforms";

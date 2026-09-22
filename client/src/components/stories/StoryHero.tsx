@@ -9,9 +9,9 @@ import {
   SparkFilledIcon,
 } from "../../assets/icons";
 import { Button } from "../ui";
-import { GenrePill } from "./GenrePill";
-import { StoryStats } from "./StoryStats";
-import { StoryTags } from "./StoryTags";
+import { GenrePill } from "./genrepill";
+import { StoryStats } from "./storystats";
+import { StoryTags } from "./storytags";
 
 interface DonationLink {
   platform: string;

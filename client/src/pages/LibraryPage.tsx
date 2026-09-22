@@ -11,7 +11,7 @@ import {
   StoryGrid,
 } from "../components/stories";
 import { Button, Input } from "../components/ui";
-import { useStories } from "../hooks/useStories";
+import { useStories } from "../hooks/usestories";
 
 export function LibraryPage() {
   const [searchParams, setSearchParams] = useSearchParams();

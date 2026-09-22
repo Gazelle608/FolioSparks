@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import type { Desk, DeskMember, DeskInvite, DeskSubmission,} from "../types/desk";
+import type { Desk, DeskInvite, DeskMember, DeskSubmission } from "../types/desk";
 
 import {
   approveSubmission,
@@ -51,12 +51,12 @@ export function useStoryDesk(storyId: string | null) {
       return;
     }
 
-    setDesk(deskResult.data);
+    setDesk(deskResult.data as unknown as Desk);
     const membersResult = await getDeskMembers(deskResult.data.id);
     if (!mountedRef.current)
       return;
 
-    setMembers(membersResult.data ?? []);
+    setMembers((membersResult.data ?? []) as unknown as DeskMember[]);
     setLoading(false);
   }, [storyId]);
 
@@ -104,11 +104,13 @@ export function useDeskManagement(deskId: string | null) {
     if (!mountedRef.current)
       return;
 
-    setMembers(membersResult.data ?? []);
+    setMembers((membersResult.data ?? []) as unknown as DeskMember[]);
     setPendingInvites(
-      (invitesResult.data ?? []).filter(i => i.desk_id === deskId),
+      (invitesResult.data ?? []).filter(i => i.desk_id === deskId) as unknown as DeskInvite[],
     );
-    setSubmissions(submissionsResult.data ?? []);
+    setSubmissions(
+      (submissionsResult.data ?? []) as unknown as DeskSubmission[],
+    );
     setLoading(false);
   }, [deskId, user]);
 
@@ -126,7 +128,10 @@ export function useDeskManagement(deskId: string | null) {
       const result = await inviteToDesk(deskId, invitedUserId, message);
       if (result.error)
         return { error: result.error };
-      setPendingInvites(prev => [result.data!, ...prev]);
+      setPendingInvites(prev => [
+        result.data as unknown as DeskInvite,
+        ...prev,
+      ]);
       return { error: null };
     },
     [deskId],
@@ -236,7 +241,7 @@ export function useMyInvites() {
     const result = await getPendingInvites(user.id);
     if (!mountedRef.current)
       return;
-    setInvites(result.data ?? []);
+    setInvites((result.data ?? []) as unknown as DeskInvite[]);
     setLoading(false);
   }, [user]);
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 import { SparkFilledIcon } from "../../assets/icons";
-import { AudioControls } from "./AudioControls";
+import { AudioControls } from "./audiocontrols";
 import { AudioDownloadButton } from "./audiodownloadbutton";
-import { useBrowserTTS } from "./useBrowserTTS";
+import { useBrowserTTS } from "./usebrowsertts";
 
 // ---------------------------------------------------------------------------
 // Public API
@@ -121,7 +121,8 @@ function Mp3Player({
       return;
 
     const onTime = () => {
-      if (el.duration > 0) setProgress(el.currentTime / el.duration);
+      if (el.duration > 0)
+        setProgress(el.currentTime / el.duration);
     };
     const onLoaded = () => {
       if (!durationSeconds && el.duration > 0)

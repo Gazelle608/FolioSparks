@@ -12,7 +12,7 @@ import type { SparkLedgerEntry } from "../types/spark";
 
 import { spendSparks as apiSpendSparks, getBalance, getLedger } from "../api/sparks";
 import { supabase } from "../api/supabase";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "./authcontext";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -82,7 +82,7 @@ export function SparksProvider({ children }: { children: ReactNode }) {
     ]);
 
     setBalance(balanceRes.data ?? 0);
-    setLedger(ledgerRes.data ?? []);
+    setLedger((ledgerRes.data ?? []) as unknown as SparkLedgerEntry[]);
     setHasMoreLedger((ledgerRes.data?.length ?? 0) === LEDGER_PAGE_SIZE);
 
     setLoading(false);
@@ -147,7 +147,7 @@ export function SparksProvider({ children }: { children: ReactNode }) {
     if (result.error)
       return;
 
-    const next = result.data ?? [];
+    const next = (result.data ?? []) as unknown as SparkLedgerEntry[];
     setLedger(prev => [...prev, ...next]);
     setHasMoreLedger(next.length === LEDGER_PAGE_SIZE);
   }, [user, ledger.length, hasMoreLedger]);
@@ -186,7 +186,7 @@ export function SparksProvider({ children }: { children: ReactNode }) {
         });
       }, 500);
 
-      return { error: null, entry: result.data };
+      return { error: null, entry: result.data as unknown as SparkLedgerEntry };
     },
     [user, balance],
   );

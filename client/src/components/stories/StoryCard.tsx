@@ -4,15 +4,12 @@ import type { StoryCardData } from "../../types/story";
 
 import { getCoverUrl } from "../../api/supabase";
 import {
-  CoWrittenBadge,
   DeskIcon,
   PollIcon,
   SparkFilledIcon,
 } from "../../assets/icons";
-import { AudioAvailableBadge } from "../../assets/icons/audioavailablebadge";
-import { GenrePill } from "./GenrePill";
+import { GenrePill } from "./genrepill";
 import { StoryStats } from "./storystats";
-import { StoryTags } from "./storytags";
 
 interface StoryCardProps {
   story: StoryCardData;

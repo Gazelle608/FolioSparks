@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useauth';
-import { useSparks } from '../hooks/useSparks';
-import { useMembership } from '../hooks/useMembership';
+import { useSparks } from '../hooks/usesparks';
+import { useMembership } from '../hooks/usemembership';
 import { supabase } from '../api/supabase';
 import { PageWrapper } from '../components/layout';
 import { Card, Spinner, Button } from '../components/ui';

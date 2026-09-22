@@ -65,7 +65,7 @@ export function useStories(
         return;
       }
 
-      const next = result.data;
+      const next = result.data as unknown as Story[];
       setStories(prev => (append ? [...prev, ...next] : next));
       setHasMore(next.length === (opts.limit ?? 24));
       setLoading(false);
@@ -126,7 +126,7 @@ export function useBurningNow(limit = 6): StoriesResult {
       setError(result.error ?? "Could not load stories");
     }
     else {
-      setStories(result.data);
+      setStories(result.data as unknown as Story[]);
     }
     setLoading(false);
   }, [limit]);
@@ -175,7 +175,7 @@ export function useAuthorStories(
       setError(result.error ?? "Could not load stories");
     }
     else {
-      setStories(result.data);
+      setStories(result.data as unknown as Story[]);
     }
     setLoading(false);
   }, [authorId, includeDrafts]);

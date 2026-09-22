@@ -75,7 +75,7 @@ export function useChapter(
     }
 
     const ch = chapterResult.data;
-    setChapter(ch);
+    setChapter(ch as Chapter);
 
     // Fetch adjacent chapters in parallel
     const adjacentResult = await getAdjacentChapters(storyId, chapterNumber);
@@ -84,8 +84,8 @@ export function useChapter(
       return;
 
     if (adjacentResult.data) {
-      setPrevious(adjacentResult.data.previous);
-      setNext(adjacentResult.data.next);
+      setPrevious(adjacentResult.data.previous as Chapter | null);
+      setNext(adjacentResult.data.next as Chapter | null);
     }
 
     setLoading(false);

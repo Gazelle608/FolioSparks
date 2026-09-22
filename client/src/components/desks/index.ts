@@ -1,4 +1,4 @@
-export { CoWriterList } from "./CoWriterList";
-export { DeskCard } from "./DeskCard";
-export { DeskInvite } from "./DeskInvite";
-export { DeskSubmissionList } from "./DeskSubmission";
+export { CoWriterList } from "./cowriterlist";
+export { DeskCard } from "./deskcard";
+export { DeskInvite } from "./deskinvite";
+export { DeskSubmissionList } from "./desksubmission";

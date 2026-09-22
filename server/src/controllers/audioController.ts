@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 
-import * as audioService from "../services/audioService.js";
+import * as audioService from "../services/audioservice.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { HttpError } from "../utils/errors.js";
 
@@ -12,7 +12,7 @@ export const stream = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user)
     throw HttpError.unauthorized();
 
-  const chapterId = req.params.chapterId!;
+  const chapterId = req.params.chapterId as string;
   const result = await audioService.getStreamUrl(chapterId, req.user.id);
   return res.json(result);
 });
@@ -25,7 +25,7 @@ export const download = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user)
     throw HttpError.unauthorized();
 
-  const chapterId = req.params.chapterId!;
+  const chapterId = req.params.chapterId as string;
   const result = await audioService.getDownloadUrl(chapterId, req.user.id);
   return res.json(result);
 });
@@ -38,7 +38,7 @@ export const generate = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user)
     throw HttpError.unauthorized();
 
-  const chapterId = req.params.chapterId!;
+  const chapterId = req.params.chapterId as string;
   const job = await audioService.requestGeneration(chapterId, req.user.id);
   return res.status(202).json({ jobId: job.jobId });
 });
@@ -51,7 +51,7 @@ export const status = asyncHandler(async (req: Request, res: Response) => {
   if (!req.user)
     throw HttpError.unauthorized();
 
-  const chapterId = req.params.chapterId!;
+  const chapterId = req.params.chapterId as string;
   const status = await audioService.getStatus(chapterId, req.user.id);
   return res.json(status);
 });

@@ -6,8 +6,8 @@ import type { Poll, PollOption } from "../../types/poll";
 import { vote as castVote, getPollOptions, getUserVote } from "../../api/polls";
 import { PollIcon } from "../../assets/icons";
 import { useAuth } from "../../hooks/useauth";
-import { PollResults } from "./PollResults";
-import { PollVoteForm } from "./PollVoteForm";
+import { PollResults } from "./pollresults";
+import { PollVoteForm } from "./pollvoteform";
 
 interface PollCardProps {
   poll: Poll;
@@ -40,10 +40,20 @@ export function PollCard({ poll, variant = "chapter-end" }: PollCardProps) {
       if (cancelled)
         return;
 
-      if (optionsRes.data)
-        setOptions(optionsRes.data);
-      if (voteRes.data)
-        setMyVoteOptionId(voteRes.data.option_id);
+      if (optionsRes.data) {
+        setOptions((optionsRes.data as unknown as PollOption[]).map(option => ({
+          id: option.id,
+          poll_id: option.poll_id,
+          option_text: option.option_text,
+          display_order: option.display_order,
+          vote_count: option.vote_count,
+        })));
+      }
+      if (voteRes.data && typeof voteRes.data === "object" && "option_id" in voteRes.data) {
+        setMyVoteOptionId(
+          typeof voteRes.data.option_id === "string" ? voteRes.data.option_id : null,
+        );
+      }
       setLoading(false);
     };
 
@@ -69,7 +79,7 @@ export function PollCard({ poll, variant = "chapter-end" }: PollCardProps) {
         o.id === optionId ? { ...o, vote_count: o.vote_count + 1 } : o,
       ),
     );
-    setLocalPoll((p: { total_votes: number }) => ({ ...p, total_votes: p.total_votes + 1 }));
+    setLocalPoll(p => ({ ...p, total_votes: p.total_votes + 1 }));
 
     return { error: null };
   };

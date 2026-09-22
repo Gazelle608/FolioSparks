@@ -10,7 +10,7 @@ import {
   type DonationLinkDraft,
   type DonationPlatform,
   DonationPlatformPicker,
-} from "../auth/onboarding/DonationPlatformPicker";
+} from "../auth/onboarding/donationplatformpicker";
 import { Button, Card, useToast } from "../ui";
 
 // ---------------------------------------------------------------------------

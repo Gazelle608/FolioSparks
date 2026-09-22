@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import type { MembershipTier } from "../../types/membership";
 
 import { SparkFilledIcon } from "../../assets/icons";
-import { MembershipBadge } from "./MembershipBadge";
+import { MembershipBadge } from "./membershipbadge";
 
 interface SparksAllowanceDisplayProps {
   balance: number;

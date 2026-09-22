@@ -1,5 +1,5 @@
-export { PollBuilder } from "./PollBuilder";
-export { PollCard } from "./PollCard";
-export { PollResults } from "./PollResults";
+export { PollBuilder } from "./pollbuilder";
+export { PollCard } from "./pollcard";
+export { PollResults } from "./pollresults";
 export { PollSummary } from "./pollsummary";
-export { PollVoteForm } from "./PollVoteForm";
+export { PollVoteForm } from "./pollvoteform";

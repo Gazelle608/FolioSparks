@@ -5,10 +5,10 @@ export * from "./constants";
 export * from "./formatters";
 
 // Reading & audio time
-export * from "./ReadingTime";
+export * from "./readingtime";
 
 // Spark economy
-export * from "./sparkCosts";
+export * from "./sparkcosts";
 
 // Validators
 export * from "./validators";

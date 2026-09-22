@@ -25,7 +25,7 @@ export function PublishFlowPage() {
   useEffect(() => {
     if (!storyId) return;
     getStoryById(storyId).then((res) => {
-      if (res.data) setStory(res.data);
+      if (res.data) setStory(res.data as unknown as Story);
       setLoading(false);
     });
   }, [storyId]);

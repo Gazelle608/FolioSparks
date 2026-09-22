@@ -120,13 +120,13 @@ export function CreateStoryForm({ onCreated }: CreateStoryFormProps) {
       return;
     }
 
-    const storyId = result.data!.id;
+    const storyId = String(result.data!.id);
 
     // 2. Upload cover if provided
     if (coverFile) {
       const uploadResult = await uploadCover(storyId, coverFile);
       if (uploadResult.error) {
-        toast.error("Story created, but cover upload failed. You can retry in the story editor.");
+        toast.error(String(uploadResult.error));
       }
     }
 

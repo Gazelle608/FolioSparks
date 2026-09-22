@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { signUp } from "../../api/auth";
 import { Button, Input } from "../ui";
-import { GoogleAuthButton } from "./GoogleAuthButton";
+import { GoogleAuthButton } from "./googleauthbutton";
 
 interface SignupFormProps {
   /** Where to send users after signup (defaults to onboarding) */
@@ -47,6 +47,7 @@ export function SignupForm({ redirectTo = "/onboarding" }: SignupFormProps) {
     if (!email.trim()) {
       next.email = "Email is required";
     }
+    // eslint-disable-next-line regexp/no-super-linear-backtracking
     else if (!/^\S+@\S[^\s.]*\.\S+$/.test(email.trim())) {
       next.email = "Enter a valid email";
     }

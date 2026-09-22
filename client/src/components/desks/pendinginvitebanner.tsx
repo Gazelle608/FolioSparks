@@ -4,7 +4,7 @@ import type { DeskInvite } from "../../types/desk";
 
 import { DeskIcon } from "../../assets/icons";
 import { useAuth } from "../../hooks/useauth";
-import { useMyInvites } from "../../hooks/useDesk";
+import { useMyInvites } from "../../hooks/usedesk";
 import { Avatar, Button, useToast } from "../ui";
 
 // ---------------------------------------------------------------------------

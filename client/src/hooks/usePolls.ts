@@ -74,7 +74,7 @@ export function useChapterPoll(chapterId: string | null): UseChapterPollResult {
       return;
     }
 
-    const p = pollResult.data;
+    const p = pollResult.data as unknown as Poll;
     setPoll(p);
 
     const [optionsResult, voteResult] = await Promise.all([
@@ -85,7 +85,7 @@ export function useChapterPoll(chapterId: string | null): UseChapterPollResult {
     if (!mountedRef.current)
       return;
 
-    setOptions(optionsResult.data ?? []);
+    setOptions((optionsResult.data ?? []) as unknown as PollOption[]);
     setMyVoteOptionId(
       typeof voteResult.data?.option_id === "string"
         ? voteResult.data.option_id
@@ -115,7 +115,7 @@ export function useChapterPoll(chapterId: string | null): UseChapterPollResult {
           o.id === optionId ? { ...o, vote_count: o.vote_count + 1 } : o,
         ),
       );
-      setPoll((prev: { total_votes: number }) => (prev ? { ...prev, total_votes: prev.total_votes + 1 } : prev));
+      setPoll(prev => (prev ? { ...prev, total_votes: prev.total_votes + 1 } : prev));
 
       return { error: null };
     },
@@ -161,7 +161,7 @@ export function useStoryPolls(storyId: string | null) {
     if (!mountedRef.current)
       return;
     if (result.data)
-      setPolls(result.data);
+      setPolls(result.data as unknown as Poll[]);
     setLoading(false);
   }, [storyId]);
 
@@ -175,7 +175,7 @@ export function useStoryPolls(storyId: string | null) {
       if (result.error || !result.data) {
         return { error: result.error ?? "Could not create poll", poll: null };
       }
-      setPolls(prev => [result.data!, ...prev]);
+      setPolls(prev => [result.data as unknown as Poll, ...prev]);
       return { error: null, poll: result.data };
     },
     [],

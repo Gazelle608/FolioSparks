@@ -4,4 +4,4 @@
  * Returns tier, allowance, nextGrantAt, isFree, isSpark, isSparkPro, hasTier(), refresh().
  * See contexts/MembershipContext.tsx for the full implementation.
  */
-export { useMembership } from "../contexts/MembershipContext";
+export { useMembership } from "../contexts/membershipcontext";

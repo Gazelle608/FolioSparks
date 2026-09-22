@@ -1,13 +1,13 @@
-import type { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal} from "react";
+import type { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal } from "react";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 
 import type { Chapter } from "../../types/chapter";
 
-import { ChapterNavigation } from "./ChapterNavigation";
-import { ProgressBar } from "./ProgressBar";
-import { ReaderControls, type ReaderPrefs, THEME_CLASSES } from "./ReaderControls";
-import { SparkButton } from "./SparkButton";
+import { ChapterNavigation } from "./chapternavigation";
+import { ProgressBar } from "./progressbar";
+import { ReaderControls, type ReaderPrefs, THEME_CLASSES } from "./readercontrols";
+import { SparkButton } from "./sparkbutton";
 
 interface ChapterReaderProps {
   storySlug: string;

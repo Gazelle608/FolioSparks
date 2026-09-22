@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useMembership } from '../hooks/useMembership';
-import { Container } from '../components/layout';
-import { Button, Card } from '../components/ui';
-import { CheckCircleIcon, SparkFilledIcon, ArrowRightIcon } from '../assets/icons';
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import { ArrowRightIcon, CheckCircleIcon, SparkFilledIcon } from "../assets/icons";
+import { Container } from "../components/layout";
+import { Button, Card } from "../components/ui";
+import { useMembership } from "../hooks/usemembership";
 
 export function CheckoutSuccessPage() {
   const { tier, allowance, refresh } = useMembership();
@@ -30,9 +31,10 @@ export function CheckoutSuccessPage() {
             You're in
           </h1>
           <p className="mt-2 text-sm text-primary-500">
-            {tier === 'spark_pro'
-              ? 'Spark Pro is active.'
-              : 'Spark is active.'}{' '}
+            {tier === "spark_pro"
+              ? "Spark Pro is active."
+              : "Spark is active."}
+            {" "}
             Your new allowance will land on the 1st.
           </p>
 

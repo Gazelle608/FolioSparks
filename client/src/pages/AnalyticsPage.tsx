@@ -1,17 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
-import { useAuth } from '../hooks/useauth';
-import { getStoryById } from '../api/stories';
-import { listChapters } from '../api/chapters';
-import { PageWrapper } from '../components/layout';
-import { Card, Spinner } from '../components/ui';
-import {
-  SparksChart,
-  ReadershipChart,
-  ChapterBreakdown,
-} from '../components/studio';
-import type { Story } from '../types/story';
-import type { Chapter } from '../types/chapter';
+import { useEffect, useState } from "react";
+import { Navigate, useParams } from "react-router-dom";
+
+import type { Chapter } from "../types/chapter";
+import type { Story } from "../types/story";
+
+import { listChapters } from "../api/chapters";
+import { getStoryById } from "../api/stories";
+import { PageWrapper } from "../components/layout";
+import { ChapterBreakdown, ReadershipChart, SparksChart } from "../components/studio";
+import { Card, Spinner } from "../components/ui";
+import { useAuth } from "../hooks/useauth";
 
 export function AnalyticsPage() {
   const { storyId } = useParams<{ storyId: string }>();
@@ -22,14 +20,20 @@ export function AnalyticsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!storyId) return;
+    if (!storyId) {
+      return;
+    }
     (async () => {
       const [storyRes, chaptersRes] = await Promise.all([
         getStoryById(storyId),
         listChapters(storyId, true),
       ]);
-      if (storyRes.data) setStory(storyRes.data);
-      if (chaptersRes.data) setChapters(chaptersRes.data);
+      if (storyRes.data) {
+        setStory(storyRes.data as unknown as Story);
+      }
+      if (chaptersRes.data) {
+        setChapters(chaptersRes.data as unknown as Chapter[]);
+      }
       setLoading(false);
     })();
   }, [storyId]);
@@ -51,8 +55,8 @@ export function AnalyticsPage() {
 
   const sparksData = buildSparkSeries(chapters);
   const readsData = chapters
-    .filter((c) => c.is_published)
-    .map((c) => ({ label: `Ch.${c.chapter_number}`, value: c.read_count }));
+    .filter(c => c.is_published)
+    .map(c => ({ label: `Ch.${c.chapter_number}`, value: c.read_count }));
 
   return (
     <PageWrapper
@@ -63,7 +67,7 @@ export function AnalyticsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         <StatCard label="Total Sparks" value={totalSparks.toLocaleString()} accent />
         <StatCard label="Total reads" value={story.read_count.toLocaleString()} />
-        <StatCard label="Chapters published" value={String(chapters.filter((c) => c.is_published).length)} />
+        <StatCard label="Chapters published" value={String(chapters.filter(c => c.is_published).length)} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -72,7 +76,7 @@ export function AnalyticsPage() {
       </div>
 
       <ChapterBreakdown
-        chapters={chapters.map((c) => ({
+        chapters={chapters.map(c => ({
           id: c.id,
           chapter_number: c.chapter_number,
           title: c.title,
@@ -96,7 +100,7 @@ function StatCard({
   accent?: boolean;
 }) {
   return (
-    <Card className={`p-5 ${accent ? 'border-spark/40 bg-spark/5' : ''}`}>
+    <Card className={`p-5 ${accent ? "border-spark/40 bg-spark/5" : ""}`}>
       <p className="text-xs font-medium text-primary-500 uppercase tracking-wider">
         {label}
       </p>
@@ -109,8 +113,8 @@ function StatCard({
 
 function buildSparkSeries(chapters: Chapter[]) {
   return chapters
-    .filter((c) => c.is_published && c.published_at)
-    .map((c) => ({
+    .filter(c => c.is_published && c.published_at)
+    .map(c => ({
       date: c.published_at!,
       value: c.spark_count,
     }));

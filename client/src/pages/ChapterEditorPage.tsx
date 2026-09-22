@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../hooks/useauth';
-import { getStoryById } from '../api/stories';
-import { getChapterByNumber } from '../api/chapters';
-import { useChapterPoll } from '../hooks/usePolls';
-import { PageWrapper } from '../components/layout';
-import { Card, Button, Spinner } from '../components/ui';
-import { ChapterEditor, PublishPreview } from '../components/studio';
-import { PollCard } from '../components/polls';
-import { ArrowRightIcon } from '../assets/icons';
-import type { Story } from '../types/story';
-import type { Chapter } from '../types/chapter';
+import { useEffect, useState } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+
+import type { Chapter } from "../types/chapter";
+import type { Story } from "../types/story";
+
+import { getChapterByNumber } from "../api/chapters";
+import { getStoryById } from "../api/stories";
+import { ArrowRightIcon } from "../assets/icons";
+import { PageWrapper } from "../components/layout";
+import { PollCard } from "../components/polls";
+import { ChapterEditor, PublishPreview } from "../components/studio";
+import { Button, Card, Spinner } from "../components/ui";
+import { useAuth } from "../hooks/useauth";
+import { useChapterPoll } from "../hooks/usepolls";
 
 export function ChapterEditorPage() {
   const { storyId, chapterNumber } = useParams<{
@@ -28,14 +30,20 @@ export function ChapterEditorPage() {
   const { poll } = useChapterPoll(chapter?.id ?? null);
 
   useEffect(() => {
-    if (!storyId || !chapterNumber) return;
+    if (!storyId || !chapterNumber) {
+      return;
+    }
     (async () => {
       const [storyRes, chapterRes] = await Promise.all([
         getStoryById(storyId),
         getChapterByNumber(storyId, Number(chapterNumber)),
       ]);
-      if (storyRes.data) setStory(storyRes.data);
-      if (chapterRes.data) setChapter(chapterRes.data);
+      if (storyRes.data) {
+        setStory(storyRes.data as unknown as Story);
+      }
+      if (chapterRes.data) {
+        setChapter(chapterRes.data as Chapter);
+      }
       setLoading(false);
     })();
   }, [storyId, chapterNumber]);
@@ -60,7 +68,7 @@ export function ChapterEditorPage() {
       size="lg"
       title={`Chapter ${chapter.chapter_number}`}
       subtitle={story.title}
-      action={
+      action={(
         <div className="flex items-center gap-2">
           <Button variant="ghost" onClick={() => setPreviewOpen(true)}>
             Preview
@@ -73,12 +81,12 @@ export function ChapterEditorPage() {
             Back to story
           </Button>
         </div>
-      }
+      )}
     >
       <ChapterEditor
         chapter={chapter}
         storySlug={storySlug}
-        onSaved={(next) => setChapter(next)}
+        onSaved={next => setChapter(next)}
       />
 
       {isPublished && !poll && (

@@ -1,9 +1,9 @@
-export { ChapterGate } from "./ChapterGate";
-export { ChapterList } from "./ChapterList";
-export { ChapterNavigation } from "./ChapterNavigation";
-export { ChapterReader, ReaderTopBar } from "./ChapterReader";
-export { ProgressBar } from "./ProgressBar";
-export { loadReaderPrefs, ReaderControls, saveReaderPrefs, THEME_CLASSES } from "./ReaderControls";
-export type { ReaderPrefs } from "./ReaderControls";
-export { SparkButton } from "./SparkButton";
-export { SparkModal } from "./SparkModal";
+export { ChapterGate } from "./chaptergate";
+export { ChapterList } from "./chapterlist";
+export { ChapterNavigation } from "./chapternavigation";
+export { ChapterReader, ReaderTopBar } from "./chapterreader";
+export { ProgressBar } from "./progressbar";
+export { loadReaderPrefs, ReaderControls, saveReaderPrefs, THEME_CLASSES } from "./readercontrols";
+export type { ReaderPrefs } from "./readercontrols";
+export { SparkButton } from "./sparkbutton";
+export { SparkModal } from "./sparkmodal";

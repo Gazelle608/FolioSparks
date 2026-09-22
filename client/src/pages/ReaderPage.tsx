@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useChapter } from "../hooks/useChapter";
-import { useChapterPoll } from "../hooks/usePolls";
-import { useSparks } from "../hooks/useSparks";
+import { useChapter } from "../hooks/usechapter";
+import { useChapterPoll } from "../hooks/usepolls";
+import { useSparks } from "../hooks/usesparks";
 import { useAuth } from "../hooks/useauth";
-import { useReadingProgress } from "../hooks/useReadingProgress";
+import { useReadingProgress } from "../hooks/usereadingprogress";
 import {
   ChapterReader,
   ReaderTopBar,

@@ -4,7 +4,8 @@ import type { Story } from "../../types/story";
 
 import { getCoverUrl } from "../../api/supabase";
 import { SparkFilledIcon, SparkOutlineIcon } from "../../assets/icons";
-import { Badge, Button, Dropdown, EmptyState } from "../ui";
+import { Badge, Button, Dropdown } from "../ui";
+import { EmptyState } from "../ui/emptystate";
 
 interface StoryDraftListProps {
   stories: Story[];

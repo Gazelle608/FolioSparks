@@ -1,3 +1,5 @@
+import type { Database, StoryStatus } from "../types/database.js";
+
 import { supabaseAdmin } from "../config/supabase.js";
 import { HttpError } from "../utils/errors.js";
 import { logger } from "../utils/logger.js";
@@ -9,7 +11,7 @@ import { slugify } from "./supabaseService.js";
 interface ListOptions {
   genre?: string;
   tag?: string;
-  status?: string;
+  status?: StoryStatus;
   search?: string;
   limit?: number;
   offset?: number;
@@ -180,13 +182,10 @@ export async function create(input: CreateStoryInput) {
 // ============================================================
 // Update
 // ============================================================
-export async function update(
-  id: string,
-  updates: Partial<CreateStoryInput> & {
-    status?: string;
-    published_at?: string;
-  },
-) {
+// Columns a client is allowed to change on an existing story
+type StoryUpdateInput = Database["public"]["Tables"]["stories"]["Update"];
+
+export async function update(id: string, updates: StoryUpdateInput) {
   const { data, error } = await supabaseAdmin
     .from("stories")
     .update({

@@ -3,8 +3,8 @@ import express, { type Express } from "express";
 import helmet from "helmet";
 
 import { env, isProduction } from "./config/env.js";
-import { errorHandler, notFoundHandler } from "./middleware/errorhandler.js";
-import { apiLimiter } from "./middleware/ratelimiter.js";
+import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
+import { apiLimiter } from "./middleware/rateLimiter.js";
 import devRoutes from "./routes/dev.js";
 import routes from "./routes/index.js";
 import webhookRoutes from "./routes/webhooks.js";

@@ -1,3 +1,5 @@
+import type { Json, SparkReason } from "../types/database.js";
+
 import { supabaseAdmin } from "../config/supabase.js";
 import { HttpError } from "../utils/errors.js";
 import { logger } from "../utils/logger.js";
@@ -15,14 +17,14 @@ interface SpendInput {
 interface LedgerOptions {
   limit?: number;
   offset?: number;
-  reason?: string;
+  reason?: SparkReason;
 }
 
 interface SparkEntry {
   id: string;
   user_id: string;
   delta: number;
-  reason: string;
+  reason: SparkReason;
   chapter_id: string | null;
   story_id: string | null;
   author_id: string | null;
@@ -182,8 +184,8 @@ export async function getSent(
 export async function grant(
   userId: string,
   amount: number,
-  reason: string,
-  metadata?: Record<string, unknown>,
+  reason: SparkReason,
+  metadata?: Json,
 ): Promise<void> {
   const { error } = await supabaseAdmin.from("spark_ledger").insert({
     user_id: userId,

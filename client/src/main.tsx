@@ -1,13 +1,18 @@
+/// <reference types="vite/client" />
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
 
 import { router } from "./router";
-// Global styles — this imports fonts.css, tailwind.css,
-// variables.css, and typography.css internally
-// CSS is handled by the bundler; TypeScript has no module declaration for it.
-// @ts-expect-error -- side-effect CSS import
+
+// CSS — Vite handles this at build time, types come from `vite/client`
 import "./styles/globals.css";
+
+// Fonts — bundled via @fontsource
+import "@fontsource/merriweather/400.css";
+import "@fontsource/merriweather/700.css";
+import "@fontsource-variable/inter/index.css";
 
 const rootElement = document.getElementById("root");
 

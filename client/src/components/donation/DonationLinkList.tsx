@@ -1,6 +1,6 @@
 import type { DonationLink } from "../../types/donation";
 
-import { DonationButton } from "./DonationButton";
+import { DonationButton } from "./donationbutton";
 
 interface DonationLinkListProps {
   links: DonationLink[];

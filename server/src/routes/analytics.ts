@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as analyticsController from "../controllers/analyticscontroller.js";
+import * as analyticsController from "../controllers/analyticsController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { expensiveLimiter } from "../middleware/rateLimiter.js";
 import {
   loadMembership,
   requireTier,
-} from "../middleware/requiremembership.js";
+} from "../middleware/requireMembership.js";
 import { validate } from "../middleware/validate.js";
 
 const router = Router();

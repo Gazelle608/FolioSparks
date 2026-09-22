@@ -167,7 +167,7 @@ export function validatePollOptions(options: string[]): string | null {
 // Donation URL validator — checks against the platform"s expected prefix
 // ---------------------------------------------------------------------------
 export function validateDonationUrl(
-  platform: string,
+  _platform: string,
   url: string,
   expectedPrefix?: string,
 ): string | null {

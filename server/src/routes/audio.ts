@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as audioController from "../controllers/audiocontroller.js";
+import * as audioController from "../controllers/audioController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { expensiveLimiter } from "../middleware/rateLimiter.js";
 import {
   loadMembership,
   requireTier,
-} from "../middleware/requiremembership.js";
+} from "../middleware/requireMembership.js";
 import { requireSparkPro } from "../middleware/requireSparkPro.js";
 import { validate } from "../middleware/validate.js";
 

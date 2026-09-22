@@ -2,24 +2,19 @@ import type { Request, Response } from "express";
 
 import { z } from "zod";
 
-import * as donationService from "../services/donationService.js";
+import * as donationService from "../services/donationservice.js";
 import { asyncHandler } from "../utils/asynchandler.js";
+import { DONATION_PLATFORMS } from "../utils/constants.js";
 import { HttpError } from "../utils/errors.js";
 
 // ============================================================
 // Schemas
 // ============================================================
+// Single source of truth for platform values (mirrors the DB enum)
+const platformEnum = z.enum(DONATION_PLATFORMS);
+
 const createLinkSchema = z.object({
-  platform: z.enum([
-    "patreon",
-    "ko_fi",
-    "buymeacoffee",
-    "paypal",
-    "stripe",
-    "cashapp",
-    "venmo",
-    "custom",
-  ]),
+  platform: platformEnum,
   url: z.string().url(),
   label: z.string().max(60).optional(),
   is_primary: z.boolean().optional(),
@@ -32,7 +27,7 @@ const updateLinkSchema = createLinkSchema.partial().extend({
 
 const trackClickSchema = z.object({
   author_id: z.string().uuid(),
-  platform: z.string().min(1).max(32),
+  platform: platformEnum,
 });
 
 // ============================================================

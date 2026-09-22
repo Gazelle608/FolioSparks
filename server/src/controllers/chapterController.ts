@@ -3,7 +3,7 @@ import type { Request, Response } from "express";
 import { z } from "zod";
 
 import * as chapterService from "../services/chapterservice.js";
-import * as storyService from "../services/storyService.js";
+import * as storyService from "../services/storyservice.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { HttpError } from "../utils/errors.js";
 

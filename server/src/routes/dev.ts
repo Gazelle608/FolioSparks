@@ -3,13 +3,13 @@ import { type Request, type Response, Router } from "express";
 
 import { isProduction } from "../config/env.js";
 import { supabaseAdmin } from "../config/supabase.js";
-import { runClosePollsNow } from "../jobs/closepolls.js";
-import { runAudioGeneratorNow } from "../jobs/generatechapteraudio.js";
+import { runClosePollsNow } from "../jobs/closePolls.js";
+import { runAudioGeneratorNow } from "../jobs/generateChapterAudio.js";
 // ============================================================
 // Job triggers
 // ============================================================
-import { runMonthlySparksGrantNow } from "../jobs/monthlysparkgrant.js";
-import { runPublishScheduledNow } from "../jobs/publishscheduledchapters.js";
+import { runMonthlySparksGrantNow } from "../jobs/monthlySparkGrant.js";
+import { runPublishScheduledNow } from "../jobs/publishScheduledChapters.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { logger } from "../utils/logger.js";
 

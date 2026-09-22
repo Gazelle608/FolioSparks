@@ -7,7 +7,7 @@ import { z } from "zod";
 import { env } from "../config/env.js";
 import { supabaseAdmin } from "../config/supabase.js";
 import * as authService from "../services/authservice.js";
-import * as emailService from "../services/emailservice.js";
+import * as emailService from "../services/emailService.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { HttpError } from "../utils/errors.js";
 import { logger } from "../utils/logger.js";

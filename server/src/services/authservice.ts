@@ -1,7 +1,7 @@
 import { env } from "../config/env.js";
 import { supabaseAdmin } from "../config/supabase.js";
 import { logger } from "../utils/logger.js";
-import { sendVerificationEmail, sendWelcomeEmail } from "./emailservice.js";
+import { sendVerificationEmail, sendWelcomeEmail } from "./emailService.js";
 
 // ============================================================
 // Types

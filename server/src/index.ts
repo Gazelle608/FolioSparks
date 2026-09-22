@@ -1,9 +1,9 @@
 import { createApp } from "./app.js";
 import { env, isProduction } from "./config/env.js";
-import { startPollCloser } from "./jobs/closepolls.js";
-import { startAudioGenerator } from "./jobs/generatechapteraudio.js";
-import { startMonthlySparksGrant } from "./jobs/monthlysparkgrant.js";
-import { startScheduledPublisher } from "./jobs/publishscheduledchapters.js";
+import { startPollCloser } from "./jobs/closePolls.js";
+import { startAudioGenerator } from "./jobs/generateChapterAudio.js";
+import { startMonthlySparksGrant } from "./jobs/monthlySparkGrant.js";
+import { startScheduledPublisher } from "./jobs/publishScheduledChapters.js";
 import { logger } from "./utils/logger.js";
 
 // ============================================================

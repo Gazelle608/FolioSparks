@@ -1,16 +1,16 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as chapterController from "../controllers/chaptercontroller.js";
-import * as deskController from "../controllers/deskcontroller.js";
-import * as pollController from "../controllers/pollcontroller.js";
-import * as storyController from "../controllers/storycontroller.js";
+import * as chapterController from "../controllers/chapterController.js";
+import * as deskController from "../controllers/deskController.js";
+import * as pollController from "../controllers/pollController.js";
+import * as storyController from "../controllers/storyController.js";
 import { optionalAuth, requireAuth } from "../middleware/auth.js";
 import { expensiveLimiter, writeLimiter } from "../middleware/rateLimiter.js";
 import {
   loadMembership,
   requireTier,
-} from "../middleware/requiremembership.js";
+} from "../middleware/requireMembership.js";
 import { commonSchemas, validate } from "../middleware/validate.js";
 
 const router = Router();

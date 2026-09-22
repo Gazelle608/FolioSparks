@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as pollController from "../controllers/pollcontroller.js";
+import * as pollController from "../controllers/pollController.js";
 import { optionalAuth, requireAuth } from "../middleware/auth.js";
 import { expensiveLimiter, writeLimiter } from "../middleware/rateLimiter.js";
 import { validate } from "../middleware/validate.js";

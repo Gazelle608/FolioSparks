@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as donationController from "../controllers/donationcontroller.js";
+import * as donationController from "../controllers/donationController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { writeLimiter } from "../middleware/rateLimiter.js";
 import { validate } from "../middleware/validate.js";

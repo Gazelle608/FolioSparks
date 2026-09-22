@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as chapterController from "../controllers/chaptercontroller.js";
+import * as chapterController from "../controllers/chapterController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { writeLimiter } from "../middleware/rateLimiter.js";
 import { commonSchemas, validate } from "../middleware/validate.js";

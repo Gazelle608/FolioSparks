@@ -1,8 +1,43 @@
 import type { PostgrestError } from "@supabase/supabase-js";
 
+import type { Database } from "../types/database.js";
+
 import { supabaseAdmin } from "../config/supabase.js";
 import { HttpError } from "../utils/errors.js";
 import { logger } from "../utils/logger.js";
+
+// ============================================================
+// Dynamic-table helpers
+// ------------------------------------------------------------
+// PostgREST's client is typed per generated table, so a helper that
+// accepts a runtime table name can't be checked statically. We narrow
+// once, here, so the rest of the file stays type-safe.
+// ============================================================
+type TableName = keyof Database["public"]["Tables"];
+
+interface DynamicResult {
+  data: unknown;
+  count: number | null;
+  error: PostgrestError | null;
+}
+
+interface DynamicQuery extends PromiseLike<DynamicResult> {
+  eq: (column: string, value: string | number) => DynamicQuery;
+  single: () => PromiseLike<DynamicResult>;
+  maybeSingle: () => PromiseLike<DynamicResult>;
+}
+
+interface DynamicTable {
+  select: (
+    columns: string,
+    options?: { count?: "exact"; head?: boolean },
+  ) => DynamicQuery;
+  update: (values: Record<string, unknown>) => DynamicQuery;
+}
+
+function dynamicTable(name: TableName): DynamicTable {
+  return supabaseAdmin.from(name) as unknown as DynamicTable;
+}
 
 // ============================================================
 // Query wrapper — throws HttpError on failure
@@ -29,13 +64,12 @@ export function unwrap<T>(
 // ============================================================
 // queryOne — fetch a single row or null (doesn't throw on missing)
 // ============================================================
-export async function queryOne<T>(
-  table: string,
+export async function queryOne<T = Record<string, unknown>>(
+  table: TableName,
   column: string,
   value: string | number,
 ): Promise<T | null> {
-  const { data, error } = await supabaseAdmin
-    .from(table)
+  const { data, error } = await dynamicTable(table)
     .select("*")
     .eq(column, value)
     .maybeSingle();
@@ -44,19 +78,18 @@ export async function queryOne<T>(
     logger.error(`queryOne failed`, { table, column, error: error.message });
     throw HttpError.internal(`Database error on ${table}`);
   }
-  return data as T | null;
+  return (data ?? null) as T | null;
 }
 
 // ============================================================
 // exists — check if a row exists
 // ============================================================
 export async function exists(
-  table: string,
+  table: TableName,
   column: string,
   value: string | number,
 ): Promise<boolean> {
-  const { count, error } = await supabaseAdmin
-    .from(table)
+  const { count, error } = await dynamicTable(table)
     .select(column, { count: "exact", head: true })
     .eq(column, value);
 
@@ -71,15 +104,14 @@ export async function exists(
 // increment — atomic counter bump via RPC-style update
 // ============================================================
 export async function increment(
-  table: string,
+  table: TableName,
   id: string,
   column: string,
   by = 1,
 ): Promise<void> {
   // Supabase doesn't support atomic increments directly, so we
   // read-modify-write. For high-traffic counters, use a DB function.
-  const { data, error } = await supabaseAdmin
-    .from(table)
+  const { data, error } = await dynamicTable(table)
     .select(column)
     .eq("id", id)
     .single();
@@ -88,8 +120,7 @@ export async function increment(
     return;
 
   const current = (data as Record<string, number>)[column] ?? 0;
-  await supabaseAdmin
-    .from(table)
+  await dynamicTable(table)
     .update({ [column]: current + by })
     .eq("id", id);
 }

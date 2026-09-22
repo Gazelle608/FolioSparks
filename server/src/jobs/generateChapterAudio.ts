@@ -1,11 +1,11 @@
 import cron from "node-cron";
 
 import { supabaseAdmin } from "../config/supabase.js";
-import * as audioCache from "../services/audiocacheservice.js";
+import * as audioCache from "../services/audioCacheService.js";
 import {
   isEnabled as isTtsEnabled,
   synthesize,
-} from "../services/ttsservice.js";
+} from "../services/ttsService.js";
 import { logger } from "../utils/logger.js";
 import { wrapJob } from "./runner.js";
 

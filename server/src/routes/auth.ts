@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as authController from "../controllers/authcontroller.js";
+import * as authController from "../controllers/authController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { authLimiter, emailLimiter } from "../middleware/rateLimiter.js";
 import { validate } from "../middleware/validate.js";

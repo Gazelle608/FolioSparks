@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { z } from "zod";
 
-import * as sparkController from "../controllers/sparkcontroller.js";
+import * as sparkController from "../controllers/sparkController.js";
 import { requireAuth } from "../middleware/auth.js";
 import { sparkLimiter } from "../middleware/rateLimiter.js";
 import { validate } from "../middleware/validate.js";

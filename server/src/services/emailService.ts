@@ -29,7 +29,7 @@ async function sendEmail(input: SendEmailInput): Promise<SendResult> {
       subject: input.subject,
       html: input.html,
       text: input.text,
-      reply_to: input.replyTo ?? EMAIL_REPLY_TO,
+      replyTo: input.replyTo ?? EMAIL_REPLY_TO,
     });
 
     if (error) {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Button, Card } from "../ui";
+import { Button } from "../ui";
 
 interface PublishChoiceProps {
   onChoose: (mode: "full_manuscript" | "chapter_by_chapter") => void;

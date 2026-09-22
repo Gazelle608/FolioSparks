@@ -1,9 +1,14 @@
 import type { NextFunction, Request, Response } from "express";
 
-import type { Membership } from "../types/database.types.js";
+import type { Database } from "../types/database.js";
 
 import { supabaseAdmin } from "../config/supabase.js";
 import { logger } from "../utils/logger.js";
+
+// ============================================================
+// Row alias — mirrors public.memberships
+// ============================================================
+type Membership = Database["public"]["Tables"]["memberships"]["Row"];
 
 declare module "express-serve-static-core" {
   interface Request {

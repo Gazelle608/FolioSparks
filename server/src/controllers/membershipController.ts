@@ -2,7 +2,7 @@ import type { Request, Response } from "express";
 
 import { z } from "zod";
 
-import * as membershipService from "../services/membershipService.js";
+import * as membershipService from "../services/membershipservice.js";
 import { asyncHandler } from "../utils/asynchandler.js";
 import { HttpError } from "../utils/errors.js";
 
@@ -35,7 +35,7 @@ export const checkout = asyncHandler(async (req: Request, res: Response) => {
   if (!parsed.success)
     throw HttpError.badRequest("Invalid tier");
 
-  const url = await membershipService.createCheckoutSession(
+  const url = await membershipService.createCheckoutSessionForUser(
     req.user.id,
     req.user.email!,
     parsed.data.tier,

@@ -1,5 +1,13 @@
+import type { Database } from "../types/database.js";
+
 import { supabaseAdmin } from "../config/supabase.js";
 import { HttpError } from "../utils/errors.js";
+
+// ============================================================
+// Types
+// ============================================================
+// Platform values come from the DB enum (mirrored in utils/constants.ts)
+type DonationPlatform = Database["public"]["Enums"]["donation_platform"];
 
 export async function listByAuthor(authorId: string) {
   const { data } = await supabaseAdmin
@@ -22,7 +30,7 @@ export async function getById(id: string) {
 
 export async function create(input: {
   author_id: string;
-  platform: string;
+  platform: DonationPlatform;
   url: string;
   label?: string;
   is_primary?: boolean;
@@ -70,7 +78,7 @@ export async function remove(id: string): Promise<void> {
 
 export async function trackClick(input: {
   author_id: string;
-  platform: string;
+  platform: DonationPlatform;
   clicked_by: string | null;
 }): Promise<void> {
   await supabaseAdmin.from("donation_clicks").insert({

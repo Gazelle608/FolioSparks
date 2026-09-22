@@ -3,12 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { signIn } from "../../api/auth";
 import { Button, Input } from "../ui";
-import { GoogleAuthButton } from "./GoogleAuthButton";
+import { GoogleAuthButton } from "./googleauthbutton";
 
 interface LoginFormProps {
-  /** Where to redirect after successful login */
   redirectTo?: string;
-  /** Fired after a successful sign-in (for parent-side side effects) */
   onSuccess?: () => void;
 }
 
@@ -23,7 +21,6 @@ export function LoginForm({ redirectTo = "/", onSuccess }: LoginFormProps) {
     e.preventDefault();
     setError(null);
 
-    // Basic client-side checks (backend will still validate)
     if (!email.trim())
       return setError("Please enter your email");
     if (!password)
@@ -44,7 +41,7 @@ export function LoginForm({ redirectTo = "/", onSuccess }: LoginFormProps) {
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="bg-white rounded-lg shadow-sm border border-primary-100 p-6 sm:p-8">
+      <div className="bg-white rounded-lg shadow-sm border border-primary-200 p-6 sm:p-8">
         <header className="mb-6">
           <h1 className="font-display text-2xl font-bold text-primary-900">
             Welcome back
@@ -58,7 +55,7 @@ export function LoginForm({ redirectTo = "/", onSuccess }: LoginFormProps) {
 
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-primary-100" />
+            <div className="w-full border-t border-primary-200" />
           </div>
           <div className="relative flex justify-center">
             <span className="px-3 bg-white text-xs uppercase tracking-wider text-primary-400">

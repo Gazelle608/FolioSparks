@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 
 import { SparkFilledIcon } from "../assets/icons";
-import { LoginForm } from "../components/auth";
+import { LoginForm } from "../components/auth/loginform";
 import { Container } from "../components/layout";
 
 export function SignInPage() {
@@ -9,7 +9,7 @@ export function SignInPage() {
   const next = params.get("next") ?? "/";
 
   return (
-    <div className="min-h-screen flex flex-col bg-primary-50">
+    <div className="min-h-screen flex flex-col bg-primary-100">
       <header className="py-5 px-6">
         <a href="/" className="inline-flex items-center gap-2">
           <SparkFilledIcon size={22} className="text-spark" />

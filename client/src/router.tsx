@@ -1,6 +1,6 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
-import App from "./App";
+import App from "./app";
 // Route guards
 import { ProtectedRoute } from "./components/auth/protectedroute";
 import { AnalyticsPage } from "./pages/analyticspage";
@@ -121,12 +121,9 @@ export const router = createBrowserRouter([
         ),
       },
 
-      // Author profile — must come AFTER known paths so it doesn"t shadow them
+      // Author profile — must come AFTER known paths so it doesn't shadow them
       { path: "@:username", element: <AuthorProfilePage /> },
       { path: ":username", element: <AuthorProfilePage /> },
-
-      // Redirects for common typos
-      { path: "signin", element: <Navigate to="/signin" replace /> },
 
       // 404 — must be last inside the shell
       { path: "*", element: <NotFoundPage /> },

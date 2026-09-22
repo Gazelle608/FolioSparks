@@ -155,7 +155,7 @@ export function Navbar({
                 variant="ghost"
                 size="sm"
                 className="hidden sm:inline-flex"
-                onClick={onSignIn}
+                onClick={() => navigate("/signin")}
               >
                 Sign in
               </Button>

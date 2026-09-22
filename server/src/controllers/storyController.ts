@@ -10,6 +10,7 @@ import { HttpError } from "../utils/errors.js";
 declare module "express-serve-static-core" {
   interface Request {
     user?: {
+        email_confirmed_at: any;
         email: any; id: string 
 };
   }

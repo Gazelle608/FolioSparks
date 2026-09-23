@@ -12,7 +12,6 @@ build/
 .env
 .env.local
 .env.*.local
-.env.example
 
 # Editor
 .vscode/*
@@ -30,10 +29,6 @@ npm-debug.log*
 yarn-error.log*
 logs/
 *.log
-
-# Supabase
-supabase/.branches/
-supabase/.temp/
 
 # Test
 coverage/

@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/authcontext";
 import { MembershipProvider } from "./contexts/membershipcontext";
 import { SparksProvider } from "./contexts/sparkscontext";
 import { ThemeProvider } from "./contexts/themecontext";
+import { CursorProvider } from "./contexts/cursorcontext";
 import { useAuth } from "./hooks/useauth";
 import { useSparks } from "./hooks/usesparks";
 
@@ -31,17 +32,19 @@ import { useSparks } from "./hooks/usesparks";
 export function RootProviders() {
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <MembershipProvider>
-          <SparksProvider>
-            <AudioProvider>
-              <ToastProvider>
-                <Outlet />
-              </ToastProvider>
-            </AudioProvider>
-          </SparksProvider>
-        </MembershipProvider>
-      </AuthProvider>
+      <CursorProvider>
+        <AuthProvider>
+          <MembershipProvider>
+            <SparksProvider>
+              <AudioProvider>
+                <ToastProvider>
+                  <Outlet />
+                </ToastProvider>
+              </AudioProvider>
+            </SparksProvider>
+          </MembershipProvider>
+        </AuthProvider>
+      </CursorProvider>
     </ThemeProvider>
   );
 }

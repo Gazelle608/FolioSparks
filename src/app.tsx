@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 
+import { isSupabaseConfigured } from "./api/supabase";
 import { PendingInviteBanner } from "./components/desks/pendinginvitebanner";
 import { Footer } from "./components/layout/footer";
 import { Navbar } from "./components/layout/navbar";
@@ -13,6 +14,29 @@ import { ThemeProvider } from "./contexts/themecontext";
 import { CursorProvider } from "./contexts/cursorcontext";
 import { useAuth } from "./hooks/useauth";
 import { useSparks } from "./hooks/usesparks";
+
+function MissingSupabaseConfigScreen() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-6 py-12 text-slate-900">
+      <div className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-indigo-600">
+          Configuration required
+        </p>
+        <h1 className="mt-4 text-3xl font-bold">FolioSparks needs Supabase to start</h1>
+        <p className="mt-3 text-slate-600">
+          Add your project URL and anon key to a local .env file, then restart the dev server.
+        </p>
+        <pre className="mt-5 overflow-x-auto rounded-lg bg-slate-100 p-4 text-sm text-slate-800">
+VITE_SUPABASE_URL=https://your-project.supabase.co
+VITE_SUPABASE_ANON_KEY=your-anon-key
+        </pre>
+        <p className="mt-4 text-sm text-slate-600">
+          Copy .env.example to .env and fill in the real values before running the app again.
+        </p>
+      </div>
+    </div>
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Providers
@@ -30,6 +54,10 @@ import { useSparks } from "./hooks/usesparks";
 //   Toast  → no deps, but must wrap anything that fires toasts
 // ---------------------------------------------------------------------------
 export function RootProviders() {
+  if (!isSupabaseConfigured) {
+    return <MissingSupabaseConfigScreen />;
+  }
+
   return (
     <ThemeProvider>
       <CursorProvider>

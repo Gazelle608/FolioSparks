@@ -13,32 +13,36 @@ const env = (import.meta as ImportMeta & {
 const supabaseUrl = env.VITE_SUPABASE_URL;
 const supabaseAnonKey = env.VITE_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    "Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Check your .env file.",
-  );
-}
+export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey);
 
 // ---------------------------------------------------------------------------
 // Typed client
 // ---------------------------------------------------------------------------
-export const supabase: SupabaseClient<Database> = createClient<Database>(
-  supabaseUrl,
-  supabaseAnonKey,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true,
-      storageKey: "foliosparks-auth",
-    },
-    global: {
-      headers: {
-        "x-application-name": "foliosparks-client",
+export const supabase: SupabaseClient<Database> = isSupabaseConfigured
+  ? createClient<Database>(supabaseUrl!, supabaseAnonKey!, {
+      auth: {
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+        storageKey: "foliosparks-auth",
       },
-    },
-  },
-);
+      global: {
+        headers: {
+          "x-application-name": "foliosparks-client",
+        },
+      },
+    })
+  : ({} as SupabaseClient<Database>);
+
+export function requireSupabaseConfigured(): SupabaseClient<Database> {
+  if (!isSupabaseConfigured) {
+    throw new Error(
+      "Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Copy .env.example to .env and add your Supabase values.",
+    );
+  }
+
+  return supabase;
+}
 
 // ---------------------------------------------------------------------------
 // Storage bucket names (single source of truth)
@@ -72,6 +76,9 @@ export function getCoverUrl(path: string | null | undefined): string {
     return "/default-cover.png";
   if (path.startsWith("http"))
     return path;
+  if (!isSupabaseConfigured)
+    return "/default-cover.png";
+
   const { data } = supabase.storage.from(BUCKETS.COVERS).getPublicUrl(path);
   return data.publicUrl;
 }
@@ -81,6 +88,9 @@ export function getAvatarUrl(path: string | null | undefined): string {
     return "/default-avatar.png";
   if (path.startsWith("http"))
     return path;
+  if (!isSupabaseConfigured)
+    return "/default-avatar.png";
+
   const { data } = supabase.storage.from(BUCKETS.AVATARS).getPublicUrl(path);
   return data.publicUrl;
 }
@@ -92,6 +102,9 @@ export async function getSignedAudioUrl(
   storagePath: string,
   expiresInSeconds = 900,
 ): Promise<ApiResult<string>> {
+  if (!isSupabaseConfigured)
+    return err("Supabase is not configured. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY.");
+
   const { data, error } = await supabase.storage
     .from(BUCKETS.AUDIO)
     .createSignedUrl(storagePath, expiresInSeconds);

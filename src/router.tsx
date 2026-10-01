@@ -21,6 +21,7 @@ import { OnboardingPage } from "./pages/onboardingpage";
 import { PublishFlowPage } from "./pages/publishflowpage";
 import { ReaderPage } from "./pages/readerpage";
 import { ReaderProfilePage } from "./pages/readerprofilepage";
+import { SettingsPage } from "./pages/settingspage";
 // Full-screen pages (no navbar/footer)
 import { SignInPage } from "./pages/signinpage";
 import { SignUpPage } from "./pages/signuppage";
@@ -157,6 +158,7 @@ export const router = createBrowserRouter([
       { path: POST_AUTH_PATH, element: <DashboardPage /> },
       { path: ONBOARDING_PATH, element: <OnboardingPage /> },
       { path: "/read/:slug/:chapterNumber", element: <ReaderPage /> },
+      { path: "/settings", element: <SettingsPage /> },
     ],
   },
 ]);
